@@ -1,0 +1,32 @@
+{
+  "name": "mobile-automation-test-tutorial",
+  "version": "1.0.0",
+  "description": "This repository is part of online tutorial for this [youtube channel](https://www.youtube.com/channel/UC0yz1P9c1mNfB7Rt5r-NbSA/playlists)",
+  "main": "index.js",
+  "scripts": {
+    "wdio": "wdio run ./configs/tiktok.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@wdio/cli": "^6.4.6",
+    "@wdio/local-runner": "^6.4.6",
+    "@wdio/mocha-framework": "^6.4.0",
+    "allure-commandline": "^2.13.0",
+    "dotenv": "^16.0.3",
+    "google-spreadsheet": "^3.3.0",
+    "imap-simple": "^5.1.0",
+    "moment": "^2.29.4",
+    "webdriverio": "^6.4.6",
+    "x-sound-player": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/register": "^7.11.5",
+    "@wdio/allure-reporter": "^6.8.1",
+    "chai": "^4.2.0"
+  }
+}
