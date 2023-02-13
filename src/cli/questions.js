@@ -4,41 +4,54 @@ const { updateAttributeEnv } = require('../common/helper.js')
 dotenv.config()
 
 
-const List = async (choices = ["start" , `settings` , "clear"]) => {
+const List = async (choices = ["start", `settings`, "clear"]) => {
     return await inquirer.prompt({ name: `list`, type: `list`, message: `choose`, choices })
 }
 
 const Confirm = async () => {
-   return await (await inquirer.prompt({ name: `end`, type: `confirm`, message: `confirm` })).end
+    return await (await inquirer.prompt({ name: `end`, type: `confirm`, message: `confirm` })).end
 }
 
 const Start = async () => {
-    return await (await inquirer.prompt({ name: `start`, type: `list`, message: `choose`, choices : ["new" , "current"] })).start
+    return await (await inquirer.prompt({ name: `start`, type: `list`, message: `choose`, choices: ["new", "current"] })).start
 }
 
 const Current = async () => {
-    return await (await inquirer.prompt({ name: `current`, type: `list`, message: `choose`, choices : ["all" , "upload" , "follow" , "edit"] })).current
+    return await (await inquirer.prompt({ name: `current`, type: `list`, message: `choose`, choices: ["all", "upload", "follow", "edit"] })).current
 }
 
 
 const Settings = async () => {
     const questions = [
         {
-            type: 'list', name: 'type', message: `enter type (${process.env.type})`, choices: ["signup" , "login"] ,
+            type: 'list', name: 'type', message: `enter type (${process.env.type})`, choices: ["signup", "login"],
             default() { return process.env.type },
             filter(value) {
                 updateAttributeEnv("type", value)
                 return true
             }
         },
+        /////////////////////////////////////////////////////////////////////////////////////////
+
         {
-            type: 'list', name: 'ip', message: `enter ip (${process.env.ip})`, choices: ["unique" , "same"] ,
+            type: 'list', name: 'ip', message: `enter ip (${process.env.ip})`, choices: ["unique", "same"],
             default() { return process.env.ip },
             filter(value) {
                 updateAttributeEnv("ip", value)
                 return true
             }
         },
+        /////////////////////////////////////////////////////////////////////////////////////////
+        {
+            type: 'list', name: 'vpn', message: `enter vpn (${process.env.vpn})`, choices: ["nordvpn"],
+            default() { return process.env.vpn },
+            filter(value) {
+                updateAttributeEnv("vpn", value)
+                return true
+            },
+        },
+        /////////////////////////////////////////////////////////////////////////////////////////
+
         {
             type: 'input', name: 'RESPONSES_SHEET_ID', message: "enter RESPONSES_SHEET_ID",
             default() { return process.env.RESPONSES_SHEET_ID },
@@ -138,13 +151,13 @@ const Settings = async () => {
         },
         /////////////////////////////////////////////////////////////////////////////////////////
         {
-            type: 'list', name: 'source', message: `enter source (${process.env.source})`, choices: ["temporary" , "33mail"] ,
+            type: 'list', name: 'source', message: `enter source (${process.env.source})`, choices: ["temporary", "33mail"],
             default() { return process.env.source },
             filter(value) {
                 updateAttributeEnv("source", value)
                 return true
             },
-            when(answers) { return answers.source}
+            when(answers) { return answers.source }
         },
         /////////////////////////////////////////////////////////////////////////////////////////
         {
@@ -176,7 +189,7 @@ const Settings = async () => {
             },
             when(answers) { return answers.source === "33mail" }
         },
-        
+
 
     ]
 
@@ -186,4 +199,4 @@ const Settings = async () => {
 
 
 
-module.exports = { List, Settings, Confirm , Start , Current }
+module.exports = { List, Settings, Confirm, Start, Current }

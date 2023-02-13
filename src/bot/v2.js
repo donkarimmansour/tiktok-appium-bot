@@ -24,7 +24,6 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
 
         let Account = {
             nickname: process.env.nickname,
-            //username: process.env.lusername,
             email: process.env.email,
             password: process.env.password,
             country: process.env.country,
@@ -32,15 +31,19 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
             hastages: process.env.hastages,
             bio: process.env.bio,
             limit: process.env.limit,
-            //gmailAccount: process.env.gmailAccount,
-            //gmailPassword: process.env.gmailPassword,
             type: process.env.type,
-            //ip: process.env.ip,
             start: process.env.start,
             current: process.env.current,
             source: process.env.source,
+            vpn: process.env.vpn,
             used: "no",
             id: "",
+            ///////////////////////////////////////////////////////
+            username: process.env.lusername,
+            ip: process.env.ip,
+            gmailAccount: process.env.gmailAccount,
+            gmailPassword: process.env.gmailPassword,
+            ///////////////////////////////////////////////////////
         }
 
 
@@ -55,11 +58,19 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
             /////////////////////////////////////////////////////////////////////////////////////
 
             await browser.pause(3000)
-            await browser.startActivity("com.nordvpn.android", ".mobile.main.ControlActivity")
 
-            const NordVpnTest = new NordVpn(Account.country)
-            await NordVpnTest.ChangeIp()
+             if (Account.type === "login") {
+                const loginAccount = await getRow()
+                Account = { ...Account , ...loginAccount }
+            }
 
+            if(Account.vpn === "nordvpn"){
+                await browser.startActivity("com.nordvpn.android", ".mobile.main.ControlActivity")
+
+                const NordVpnTest = new NordVpn(Account.country)
+                await NordVpnTest.ChangeIp()
+            }
+          
             await browser.pause(3000)
 
             await browser.startActivity("com.zhiliaoapp.musically", "com.ss.android.ugc.aweme.splash.SplashActivity")
@@ -89,21 +100,14 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
                     } else if (Account.source === "temporary") {
                         const account = await Mail2.generateAccount()
                         Account = { ...Account, email: account.data.username, id: prefex }
-
                     }
-
-
-                    const SignupTest = new Signup(Account.email, Account.password, Account.nickname, Account)
 
                     const SignupTest = new Signup(Account)
                     await SignupTest.CreateNewAccount()
 
                 } else if (Account.type === "login") {
 
-                    const account = getRow()
-                    Account = { ...Account , source : account.source , email : account.email , password : account.password, id : account.id }
-
-                    const LoginTest = new Login(Account.email, Account.password)
+                    const LoginTest = new Login(Account)
                     await LoginTest.LoginToAccount()
 
                 }
@@ -157,7 +161,7 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
             /////////////////////////////////////////////////////////////////////////////////////
 
             if (Account.type === "login") {
-               updateRow(Account.id , "used", "yes")
+              await updateRow(Account.id , "used", "yes")
             }
 
             cp.exec('start cmd.exe /K npm start')
