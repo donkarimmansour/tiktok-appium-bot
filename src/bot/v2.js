@@ -1,5 +1,6 @@
 import allureReporter from '@wdio/allure-reporter'
 import Mail from '../common/gmail'
+import Mail2 from '../common/mail'
 import isInternetOnline from '../common/online';
 import Uploader from '../flows/account/Uploader';
 import Follower from '../flows/account/Follower';
@@ -11,7 +12,9 @@ import Signup from '../flows/account/v2/Signup'
 import Home from '../flows/account/home';
 import cp from 'child_process'
 import * as dotenv from 'dotenv'
+import fs from 'fs'
 import { getRow, updateRow } from '../common/helper';
+import moment from 'moment';
 dotenv.config()
 
 describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
@@ -35,6 +38,7 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
             //ip: process.env.ip,
             start: process.env.start,
             current: process.env.current,
+            source: process.env.source,
             used: "no",
             id: "",
         }
@@ -60,7 +64,7 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
 
             await browser.startActivity("com.zhiliaoapp.musically", "com.ss.android.ugc.aweme.splash.SplashActivity")
             
-            if (Account.start === "New") {
+            if (Account.start === "new") {
                 await browser.reset();
             }
         
@@ -73,14 +77,21 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
             /////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////
-            //const Account = await Mail.generateAccount() 
           
 
-            if (Account.start === "New") {
+            if (Account.start === "new") {
                 if (Account.type === "signup") {
-
                     const prefex = Mail.makeHash(10)
-                    Account = { ...Account, email: `${prefex}${Account.email}`, id : prefex }
+
+                    if (Account.source === "33mail") {
+                        Account = { ...Account, email: `${prefex}${Account.email}`, id: prefex }
+
+                    } else if (Account.source === "temporary") {
+                        const account = await Mail2.generateAccount()
+                        Account = { ...Account, email: account.data.username, id: prefex }
+
+                    }
+
 
                     const SignupTest = new Signup(Account.email, Account.password, Account.nickname, Account)
 
@@ -89,8 +100,8 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
 
                 } else if (Account.type === "login") {
 
-                    const account = getRow("nrlhawnr7f@mycpa.33mail.com")
-                    Account = { ...Account , email : account.email , password : account.password, id : account.id }
+                    const account = getRow()
+                    Account = { ...Account , source : account.source , email : account.email , password : account.password, id : account.id }
 
                     const LoginTest = new Login(Account.email, Account.password)
                     await LoginTest.LoginToAccount()
@@ -112,11 +123,11 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
                 const UploaderTest = new Uploader(Account.hastages, Account.limit)
                 await UploaderTest.UploadVideo()
 
-            } else if (Account.start === "Current") {
+            } else if (Account.start === "current") {
                 const HomeTest = new Home()
                 await HomeTest.init()
 
-                if (Account.current === "All") {
+                if (Account.current === "all") {
                     const ProfileTest = new Profile(Account.bio)
                     await ProfileTest.EditAccount()
 
@@ -126,15 +137,15 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
                     const UploaderTest = new Uploader(Account.hastages, Account.limit)
                     await UploaderTest.UploadVideo()
                 }
-                else if (Account.current === "Upload") {
+                else if (Account.current === "upload") {
                     const UploaderTest = new Uploader(Account.hastages, Account.limit)
                     await UploaderTest.UploadVideo()
                 }
-                else if (Account.current === "Follow") {
+                else if (Account.current === "follow") {
                     const FollowerTest = new Follower(Account.motherAccount)
                     await FollowerTest.followMotherAccount()
                 }
-                else if (Account.current === "Edit") {
+                else if (Account.current === "edit") {
                     const ProfileTest = new Profile(Account.bio)
                     await ProfileTest.EditAccount()
 
@@ -155,10 +166,13 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
         } catch (error) {
             console.log(error.message);
             console.log("you are offline")
-            console.log("you are offline")
-            console.log("you are offline")
+            console.log(error)
 
-            console.log(error);
+            const date =  moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')
+
+            fs.appendFileSync("./errors/messages.txt", error.message + "\n" + date + "\n")
+            fs.appendFileSync("./errors/logs.txt", error + "\n" + date + "\n")
+
         }
 
     });

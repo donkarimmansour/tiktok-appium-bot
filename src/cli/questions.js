@@ -13,11 +13,11 @@ const Confirm = async () => {
 }
 
 const Start = async () => {
-    return await (await inquirer.prompt({ name: `start`, type: `list`, message: `choose`, choices : ["New" , "Current"] })).start
+    return await (await inquirer.prompt({ name: `start`, type: `list`, message: `choose`, choices : ["new" , "current"] })).start
 }
 
 const Current = async () => {
-    return await (await inquirer.prompt({ name: `current`, type: `list`, message: `choose`, choices : ["All" , "Upload" , "Follow" , "Edit"] })).current
+    return await (await inquirer.prompt({ name: `current`, type: `list`, message: `choose`, choices : ["all" , "upload" , "follow" , "edit"] })).current
 }
 
 
@@ -72,16 +72,6 @@ const Settings = async () => {
             default() { return process.env.lusername },
             validate(value) {
                 updateAttributeEnv("lusername", value)
-                return true
-            }
-        },
-
-        /////////////////////////////////////////////////////////////////////////////////////////
-        {
-            type: 'input', name: 'email', message: "enter email",
-            default() { return process.env.email },
-            validate(value) {
-                updateAttributeEnv("email", value)
                 return true
             }
         },
@@ -146,7 +136,26 @@ const Settings = async () => {
                 return true
             }
         },
-
+        /////////////////////////////////////////////////////////////////////////////////////////
+        {
+            type: 'list', name: 'source', message: `enter source (${process.env.source})`, choices: ["temporary" , "33mail"] ,
+            default() { return process.env.source },
+            filter(value) {
+                updateAttributeEnv("source", value)
+                return true
+            },
+            when(answers) { return answers.source}
+        },
+        /////////////////////////////////////////////////////////////////////////////////////////
+        {
+            type: 'input', name: 'email', message: "enter email",
+            default() { return process.env.email },
+            validate(value) {
+                updateAttributeEnv("email", value)
+                return true
+            },
+            when(answers) { return answers.source === "33mail" }
+        },
         /////////////////////////////////////////////////////////////////////////////////////////
         {
             type: 'input', name: 'gmailAccount', message: "enter gmailAccount",
@@ -154,7 +163,8 @@ const Settings = async () => {
             validate(value) {
                 updateAttributeEnv("gmailAccount", value)
                 return true
-            }
+            },
+            when(answers) { return answers.source === "33mail" }
         },
         /////////////////////////////////////////////////////////////////////////////////////////
         {
@@ -163,8 +173,10 @@ const Settings = async () => {
             validate(value) {
                 updateAttributeEnv("gmailPassword", value)
                 return true
-            }
+            },
+            when(answers) { return answers.source === "33mail" }
         },
+        
 
     ]
 

@@ -4,6 +4,7 @@ import { soundPlayer } from 'x-sound-player'
 import moment from 'moment'
 import { join } from "path";
 import Mail from '../../../common/gmail'
+import Mail2 from '../../../common/mail'
 import { addRow } from '../../../common/helper';
 
 class Signup {
@@ -137,7 +138,7 @@ class Signup {
                         console.log("account_exist");
                         console.log("account_exist");
                         console.log("account_exist");
-                    }else if (await (await SignupOBJ.form_err()).isDisplayed()) {
+                    } else if (await (await SignupOBJ.form_err()).isDisplayed()) {
                         console.log("form_err");
                         console.log("form_err");
                         console.log("form_err");
@@ -175,7 +176,7 @@ class Signup {
 
                                 if (await (await CaptchaOBJ.cap_rotate()).isDisplayed()) {
                                     await checkCaptcha2()
-                                 }
+                                }
                             }
 
                         }
@@ -198,97 +199,112 @@ class Signup {
                             const checkCode = async () => {
                                 try {
 
-                                    // const Account = await Mail.login(this.email, this.password)
-                                    // const Messages = await Mail.fetchMessages(1)
+                                    let code = ""
 
-                                    // if (Messages.data?.length > 0) {
-                                    //     const Message = Messages.data[0] // await Mail.fetchMessage(Messages.data[0].id)
-                                    //     const code = /\b([0-9]{6})\b/.exec(Message.intro)[0]
-                                    //     await Mail.deleteMessage(Message.id)
-                                    //     await Mail.read(Message.id)
-                                    // } else {
-                                    //     await checkCode()
-                                    // }
+                                    if (this.Account.source === "33mail") {
 
-                                    const code = await Mail.getVerificationCode(this.Account.gmailAccount, this.Account.gmailPassword)
+                                           code = await Mail.getVerificationCode(this.Account.gmailAccount, this.Account.gmailPassword)
 
-                                    console.log("code ", code);
-                                    console.log("code ", code);
-                                    console.log("code ", code);
-                                    console.log("code ", code);
-                                    console.log("code ", code);
-                                    console.log("code ", code);
-                                    console.log("code ", code);
+                                    } else if (this.Account.source === "temporary") {
 
-                                    if (await SignupOBJ.waitUntilConfirmCodeDisplayed()) {
+                                        const Account = await Mail2.login(this.email, this.password)
+                                        const Messages = await Mail2.fetchMessages(1)
 
-                                        // await (await SignupOBJ.confirm_code()).setValue(code)
-                                        //        await browser.pause(1000)
-
-                                        await (await SignupOBJ.confirm_code()).addValue(code[0])
-                                        await browser.pause(1000)
-
-                                        await (await SignupOBJ.confirm_code()).addValue(code[1])
-                                        await browser.pause(1000)
-
-                                        await (await SignupOBJ.confirm_code()).addValue(code[2])
-                                        await browser.pause(1000)
-
-                                        await (await SignupOBJ.confirm_code()).addValue(code[3])
-                                        await browser.pause(1000)
-
-                                        await (await SignupOBJ.confirm_code()).addValue(code[4])
-                                        await browser.pause(1000)
-
-                                        await (await SignupOBJ.confirm_code()).addValue(code[5])
-
-                                        await browser.pause(3000)
-
-                                        if (await (await SignupOBJ.err_confirm_email()).isDisplayed()) {
-                                            await browser.pause(30000)
-
-                                            await (await SignupOBJ.send_Confirm_email()).click()
-                                            await browser.pause(30000)
-
-                                            await checkCode()
-
-                                        } else {
-                                            //////////////////////////////////////////////////////////////
-                                            //////////////////////////////////////////////////////////////
-                                            //////////////////////////////////////////////////////////////
-                                            if (await SignupOBJ.waitUntilUsernameFormDisplayed()) {
-
-                                                await (await SignupOBJ.username_textBox()).setValue(this.Account.username)
-                                                await (await SignupOBJ.confirm_signup()).click()
-
-                                                await browser.pause(3000)
-                                                if (await (await SignupOBJ.skip_btn()).isDisplayed()) {
-                                                    await (await SignupOBJ.skip_btn()).click()
-                                                }
-
-
-
-                                                this.Account.created_at = moment(Date.now()).format('L')
-                                                await this.saveAccount()
-
-                                                await browser.pause(1000)
-
-                                            }//waitUntilUsernameFormDisplayed
-                                            //////////////////////////////////////////////////////////////
-                                            //////////////////////////////////////////////////////////////
-                                            //////////////////////////////////////////////////////////////
-
+                                        if (Messages.data?.length > 0) {
+                                            const Message = Messages.data[0] // await Mail.fetchMessage(Messages.data[0].id)
+                                            code = /\b([0-9]{6})\b/.exec(Message.intro)[0]
+                                            await Mail2.deleteMessage(Message.id)
+                                            await Mail2.read(Message.id)
                                         }
 
+                                    }
+
+                                    if (code !== "") {
+
+                                        console.log("code ", code);
+                                        console.log("code ", code);
+                                        console.log("code ", code);
+                                        console.log("code ", code);
+                                        console.log("code ", code);
+                                        console.log("code ", code);
+                                        console.log("code ", code);
+
+                                        if (await SignupOBJ.waitUntilConfirmCodeDisplayed()) {
+
+                                            // await (await SignupOBJ.confirm_code()).setValue(code)
+                                            //        await browser.pause(1000)
+
+                                            await (await SignupOBJ.confirm_code()).addValue(code[0])
+                                            await browser.pause(1000)
+
+                                            await (await SignupOBJ.confirm_code()).addValue(code[1])
+                                            await browser.pause(1000)
+
+                                            await (await SignupOBJ.confirm_code()).addValue(code[2])
+                                            await browser.pause(1000)
+
+                                            await (await SignupOBJ.confirm_code()).addValue(code[3])
+                                            await browser.pause(1000)
+
+                                            await (await SignupOBJ.confirm_code()).addValue(code[4])
+                                            await browser.pause(1000)
+
+                                            await (await SignupOBJ.confirm_code()).addValue(code[5])
+
+                                            await browser.pause(3000)
+
+                                            if (await (await SignupOBJ.err_confirm_email()).isDisplayed()) {
+                                                await browser.pause(30000)
+
+                                                await (await SignupOBJ.send_Confirm_email()).click()
+                                                await browser.pause(30000)
+
+                                                await checkCode()
+
+                                            } else {
+                                                //////////////////////////////////////////////////////////////
+                                                //////////////////////////////////////////////////////////////
+                                                //////////////////////////////////////////////////////////////
+                                                if (await SignupOBJ.waitUntilUsernameFormDisplayed()) {
+
+                                                    await (await SignupOBJ.username_textBox()).setValue(this.Account.username)
+                                                    await (await SignupOBJ.confirm_signup()).click()
+
+                                                    await browser.pause(3000)
+                                                    if (await (await SignupOBJ.skip_btn()).isDisplayed()) {
+                                                        await (await SignupOBJ.skip_btn()).click()
+                                                    }
 
 
-                                    } else {
-                                        console.log("code error");
-                                        console.log("code error");
-                                        console.log("code error");
-                                        console.log("code error");
-                                        console.log("code error");
-                                    }//waitUntilConfirmCodeDisplayed
+
+                                                    this.Account.created_at = moment(Date.now()).format('L')
+                                                    await this.saveAccount()
+
+                                                    await browser.pause(1000)
+
+                                                }//waitUntilUsernameFormDisplayed
+                                                //////////////////////////////////////////////////////////////
+                                                //////////////////////////////////////////////////////////////
+                                                //////////////////////////////////////////////////////////////
+
+                                            }
+
+
+
+                                        } else {
+                                            console.log("code error");
+                                            console.log("code error");
+                                            console.log("code error");
+                                            console.log("code error");
+                                            console.log("code error");
+                                        }//waitUntilConfirmCodeDisplayed
+
+
+
+                                    }//if
+                                    else {
+                                        await checkCode()
+                                    }
 
 
 
@@ -323,7 +339,7 @@ class Signup {
                                 await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
                                 // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
                                 // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
-                
+
 
                                 await browser.pause(1000)
 

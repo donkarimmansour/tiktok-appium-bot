@@ -1,5 +1,7 @@
 import LoginOBJ from '../../../objects/account/Login'
 import CaptchaOBJ from '../../../objects/account/Captcha'
+import Mail from '../../../common/gmail'
+import Mail2 from '../../../common/mail'
 
 class Login {
 
@@ -100,76 +102,109 @@ class Login {
                                         const checkCode = async () => {
                                             try {
 
-                                                const code = await Mail.getVerificationCode("mycpa2023@gmail.com", "tkorczgupdhvwaks")
 
-                                                console.log("code ", code);
-                                                console.log("code ", code);
-                                                console.log("code ", code);
-                                                console.log("code ", code);
-                                                console.log("code ", code);
-                                                console.log("code ", code);
-                                                console.log("code ", code);
+                                                let code = ""
 
-                                                if (await LoginOBJ.waitUntilConfirmCodeDisplayed()) {
 
-                                                    // await (await LoginOBJ.confirm_code()).setValue(code)
-                                                    //        await browser.pause(1000)
 
-                                                    await (await LoginOBJ.confirm_code()).addValue(code[0])
-                                                    await browser.pause(1000)
 
-                                                    await (await LoginOBJ.confirm_code()).addValue(code[1])
-                                                    await browser.pause(1000)
+                                                if (this.Account.source === "33mail") {
 
-                                                    await (await LoginOBJ.confirm_code()).addValue(code[2])
-                                                    await browser.pause(1000)
+                                                    code = await Mail.getVerificationCode(this.Account.gmailAccount, this.Account.gmailPassword)
 
-                                                    await (await LoginOBJ.confirm_code()).addValue(code[3])
-                                                    await browser.pause(1000)
+                                                } else if (this.Account.source === "temporary") {
 
-                                                    await (await LoginOBJ.confirm_code()).addValue(code[4])
-                                                    await browser.pause(1000)
+                                                    const Account = await Mail2.login(this.email, this.password)
+                                                    const Messages = await Mail2.fetchMessages(1)
 
-                                                    await (await LoginOBJ.confirm_code()).addValue(code[5])
-
-                                                    await browser.pause(3000)
-
-                                                    if (await (await LoginOBJ.err_confirm_email()).isDisplayed()) {
-                                                        await browser.pause(30000)
-
-                                                        await (await LoginOBJ.send_Confirm_email()).click()
-                                                        await browser.pause(30000)
-
-                                                        await checkCode()
-
-                                                    } else {
-
-                                                        ////////////////////////////////////////////////////////////////////////////////////////
-                                                        ////////////////////////////////////////////////////////////////////////////////////////
-                                                        ////////////////////////////////////////////////////////////////////////////////////////
-
-                                                        console.log("okey");
-                                                        console.log("okey");
-                                                        console.log("okey");
-                                                        console.log("okey");
-                                                        console.log("okey");
-                                                        console.log("okey");
-
-                                                        ////////////////////////////////////////////////////////////////////////////////////////
-                                                        ////////////////////////////////////////////////////////////////////////////////////////
-                                                        ////////////////////////////////////////////////////////////////////////////////////////
-
+                                                    if (Messages.data?.length > 0) {
+                                                        const Message = Messages.data[0] // await Mail.fetchMessage(Messages.data[0].id)
+                                                        code = /\b([0-9]{6})\b/.exec(Message.intro)[0]
+                                                        await Mail2.deleteMessage(Message.id)
+                                                        await Mail2.read(Message.id)
                                                     }
 
+                                                }
+
+                                                if (code !== "") {
+
+                                                    console.log("code ", code);
+                                                    console.log("code ", code);
+                                                    console.log("code ", code);
+                                                    console.log("code ", code);
+                                                    console.log("code ", code);
+                                                    console.log("code ", code);
+                                                    console.log("code ", code);
+
+                                                    if (await LoginOBJ.waitUntilConfirmCodeDisplayed()) {
+
+                                                        // await (await LoginOBJ.confirm_code()).setValue(code)
+                                                        //        await browser.pause(1000)
+
+                                                        await (await LoginOBJ.confirm_code()).addValue(code[0])
+                                                        await browser.pause(1000)
+
+                                                        await (await LoginOBJ.confirm_code()).addValue(code[1])
+                                                        await browser.pause(1000)
+
+                                                        await (await LoginOBJ.confirm_code()).addValue(code[2])
+                                                        await browser.pause(1000)
+
+                                                        await (await LoginOBJ.confirm_code()).addValue(code[3])
+                                                        await browser.pause(1000)
+
+                                                        await (await LoginOBJ.confirm_code()).addValue(code[4])
+                                                        await browser.pause(1000)
+
+                                                        await (await LoginOBJ.confirm_code()).addValue(code[5])
+
+                                                        await browser.pause(3000)
+
+                                                        if (await (await LoginOBJ.err_confirm_email()).isDisplayed()) {
+                                                            await browser.pause(30000)
+
+                                                            await (await LoginOBJ.send_Confirm_email()).click()
+                                                            await browser.pause(30000)
+
+                                                            await checkCode()
+
+                                                        } else {
+
+                                                            ////////////////////////////////////////////////////////////////////////////////////////
+                                                            ////////////////////////////////////////////////////////////////////////////////////////
+                                                            ////////////////////////////////////////////////////////////////////////////////////////
+
+                                                            console.log("okey");
+                                                            console.log("okey");
+                                                            console.log("okey");
+                                                            console.log("okey");
+                                                            console.log("okey");
+                                                            console.log("okey");
+
+                                                            ////////////////////////////////////////////////////////////////////////////////////////
+                                                            ////////////////////////////////////////////////////////////////////////////////////////
+                                                            ////////////////////////////////////////////////////////////////////////////////////////
+
+                                                        }
 
 
-                                                } else {
-                                                    console.log("code error");
-                                                    console.log("code error");
-                                                    console.log("code error");
-                                                    console.log("code error");
-                                                    console.log("code error");
-                                                }//waitUntilConfirmCodeDisplayed
+
+                                                    } else {
+                                                        console.log("code error");
+                                                        console.log("code error");
+                                                        console.log("code error");
+                                                        console.log("code error");
+                                                        console.log("code error");
+                                                    }//waitUntilConfirmCodeDisplayed
+
+
+
+                                                }//if
+                                                else {
+                                                    await checkCode()
+                                                }
+
+
 
 
 

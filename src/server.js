@@ -28,8 +28,8 @@ const main = async choose => {
         const start = await Start()
         updateAttributeEnv("start", start)
 
-        if (start === "New") { }
-        else if (start === "Current") {
+        if (start === "new") { }
+        else if (start === "current") {
             const current = await Current()
             updateAttributeEnv("current", current)
         }
