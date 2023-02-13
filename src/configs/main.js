@@ -1,4 +1,4 @@
-let chai = require("chai")
+const chai = require("chai")
 const allure = require('allure-commandline');
 
 exports.config = {

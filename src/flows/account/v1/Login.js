@@ -1,4 +1,4 @@
-import LoginOBJ from '../../objects/account/Login'
+import LoginOBJ from '../../../objects/account/Login'
 
 class Login {
 

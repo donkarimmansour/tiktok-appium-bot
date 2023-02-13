@@ -5,6 +5,8 @@ const Upload_Btn = '//*[@text="Upload"]'
 const Feature_Popup = '//*[@text="Adjust clips feature enhanced"]'
 const Minutes_Popup = '//*[@text="Introducing 10 minutes video"]'
 const ViewFriends_Popup = '//*[@text="View your friends\' posts"]'
+const Publicly_Popup = '//*[@text="Post video publicly?"]'
+const Publicly_BTN = '//*[@text="Post Now"]'
 const Accept_Popup = '//*[@text="OK"]'
 const Save_BTN = '//*[@text="Next"]'
 const Video_Tap = '//*[@text="Videos"]'
@@ -13,10 +15,11 @@ const Option = '//*[@text="More options"]'
 const Switch = '//*[@text="Save to device"]'
 const Post_BTN = '(//*[@text="Post"])[last()]'
 const isUploding = '//*[contains(@text,"%")]'
+const Video_Select = '//*[@index="0"]/android.view.View'
+
 
 ////////////////////////////////////////////////////////////////////////////////
-const Option_Close = '//*[@resource-id="com.zhiliaoapp.musically:id/a0_"]'
-const Video_Select = '//*[@resource-id="com.zhiliaoapp.musically:id/e8m"]'
+//const Option_Close = '//*[@resource-id="com.zhiliaoapp.musically:id/dgd"]'
 ////////////////////////////////////////////////////////////////////////////////
 
 
@@ -60,13 +63,13 @@ class Uploader {
         return await $(Switch)
     }
 
-    async option_close() {
-        return await $(Option_Close)
-    }
+    // async option_close() {
+    //     return await $(Option_Close)
+    // }
 
     async save_btn() {
         return await $(Save_BTN)
-    }
+    } 
 
     async isUploding() {
         return await $(isUploding)
@@ -103,6 +106,46 @@ class Uploader {
     async video_select() {
         return await $(Video_Select)
     }
+
+
+    async publicly_popup() {
+        return await $(Publicly_Popup)
+    }
+
+    
+    async publicly_btn() {
+        return await $(Publicly_BTN)
+    }
+    
+    
+    async swape_to_top() {
+        await driver.touchPerform([
+            {
+                action: 'press',
+                options: {
+                    x: 500,
+                    y: 1500
+                }
+            },
+            {
+                action: 'wait',
+                options: { ms: 500 }
+            },
+            {
+                action: 'moveTo',
+                options: {
+                    x: 500,
+                    y: 200
+                }
+            },
+            {
+                action: 'release',
+                options: {}
+            }
+        ])
+
+    }
+
 
 
 }

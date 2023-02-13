@@ -1,10 +1,11 @@
-import SignupOBJ from '../../objects/account/Signup'
-import CaptchaOBJ from '../../objects/account/Captcha'
+import SignupOBJ from '../../../objects/account/Signup'
+import CaptchaOBJ from '../../../objects/account/Captcha'
 import { soundPlayer } from 'x-sound-player'
 import moment from 'moment'
 import { join } from "path";
-import Mail from '../../common/gmail'
-import { addRow } from '../../common/helper';
+import Mail from '../../../common/gmail'
+import { addRow } from '../../../common/helper';
+import NavBar from '../../../objects/common/NavBar';
 
 
 class Signup {
@@ -32,15 +33,20 @@ class Signup {
                         if (await SignupOBJ.waitUntilEmailFormDisplayed()) {
                             await (await SignupOBJ.email_textBox()).setValue(this.Account.email)
                             await browser.pause(1000)
+
+
+                            /////////////////////////////////////////////////////////////////////////////////////////////
+                            /////////////////////////////////////////////////////////////////////////////////////////////
+                            /////////////////////////////////////////////////////////////////////////////////////////////
                             await (await SignupOBJ.submit()).click()
 
                             await browser.pause(15000)
 
                             const checkCaptcha = async () => {
                                 if (await (await CaptchaOBJ.cap_slide()).isDisplayed()) {
-                                    await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "sound", "beep.wav") })
-                                    // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "sound", "beep.wav") })
-                                    // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "sound", "beep.wav") })
+                                    await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "beep.wav") })
+                                    // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..","..", "sound", "beep.wav") })
+                                    // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..","..", "sound", "beep.wav") })
 
                                     await browser.pause(20000)
 
@@ -56,6 +62,9 @@ class Signup {
                             if (await (await SignupOBJ.submit()).isDisplayed()) {
                                 await (await SignupOBJ.submit()).click()
                             }
+                            /////////////////////////////////////////////////////////////////////////////////////////////
+                            /////////////////////////////////////////////////////////////////////////////////////////////
+                            /////////////////////////////////////////////////////////////////////////////////////////////
 
 
                             if (await (await SignupOBJ.account_exist()).isDisplayed() || await (await SignupOBJ.form_err()).isDisplayed()) {
@@ -74,7 +83,7 @@ class Signup {
 
 
                             } else {
-                                await browser.pause(5000)
+                                await browser.pause(3000)
 
                                 if (await (await SignupOBJ.suggest()).isDisplayed()) {
                                     await SignupOBJ.click_on_screan()
@@ -85,8 +94,41 @@ class Signup {
                                     await (await SignupOBJ.pass_textBox()).setValue(this.Account.password)
                                     await browser.pause(1000)
 
+
+                                    /////////////////////////////////////////////////////////////////////////////////////////////
+                                    /////////////////////////////////////////////////////////////////////////////////////////////
+                                    /////////////////////////////////////////////////////////////////////////////////////////////
                                     await (await SignupOBJ.submit()).click()
-                                    await (await SignupOBJ.submit()).click()
+
+                                    await browser.pause(15000)
+
+                                    const checkCaptcha2 = async () => {
+                                        if (await (await CaptchaOBJ.cap_rotate()).isDisplayed()) {
+                                            await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "beep.wav") })
+                                            // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..","..", "sound", "beep.wav") })
+                                            // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..","..", "sound", "beep.wav") })
+
+                                            await browser.pause(20000)
+
+                                            if (await (await CaptchaOBJ.cap_rotate()).isDisplayed()) {
+                                                await checkCaptcha2()
+                                            }
+                                        }
+
+                                    }
+
+                                    await checkCaptcha2()
+
+                                    if (await (await SignupOBJ.submit()).isDisplayed()) {
+                                        await (await SignupOBJ.submit()).click()
+                                    }
+                                    /////////////////////////////////////////////////////////////////////////////////////////////
+                                    /////////////////////////////////////////////////////////////////////////////////////////////
+                                    /////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
                                     if (await SignupOBJ.waitUntilBirthdayFormDisplayed()) {
 
@@ -290,22 +332,19 @@ class Signup {
             await (await NavBar.home_icon()).click()
 
             if (await NavBar.wait_until_home_displayed()) {
-                await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "sound", "success.wav") })
-
+               
                 this.Account.created_at = moment(Date.now()).format('L')
                 await this.saveAccount()
 
-                await browser.pause(5000)
+                await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
+                // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
+                // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
+
+
+                await browser.pause(1000)
 
                 console.log("okey..");
-                console.log("okey..");
-                console.log("okey..");
-                console.log("okey..");
-                console.log("okey..");
-                console.log("okey..");
-                console.log("okey..");
-                console.log("okey..");
-                console.log("okey..");
+
             }
 
         }

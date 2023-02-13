@@ -1,34 +1,38 @@
-import Signup from '../../flows/account/Signup'
 import allureReporter from '@wdio/allure-reporter'
-import Mail from '../../common/gmail'
-import isInternetOnline from '../../common/online';
-import Splash from '../../flows/account/Splash';
-import Profile from '../../flows/account/Profile';
-import Uploader from '../../flows/account/Uploader';
-import Follower from '../../flows/account/Follower';
-import NordVpn from '../../flows/account/NordVpn';
-import Login from '../../flows/account/Login';
+import Mail from '../common/gmail'
+import isInternetOnline from '../common/online';
+import Uploader from '../flows/account/Uploader';
+import Follower from '../flows/account/Follower';
+import NordVpn from '../flows/account/NordVpn';
 import * as dotenv from 'dotenv'
 dotenv.config()
+
+import Profile from '../flows/account/v1/Profile';
+import Splash from '../flows/account/v1/Splash';
+import Login from '../flows/account/v1/Login';
+import Signup from '../flows/account/v1/Signup'
+
 
 describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
 
     it('Autmate', async () => {
 
 
+     
         let Account = {
-             nickname: process.env.nickname,
-             username: process.env.username,
-             email: process.env.email,
-             password: process.env.password,
-             country: process.env.country,
-             motherAccount: process.env.motherAccount,
-             hastages: process.env.hastages,
-             bio: process.env.bio,
-             limit: process.env.limit,
-             gmailAccount: process.env.gmailAccount,
-             gmailPassword: process.env.gmailPassword,
-        }
+            nickname: process.env.nickname,
+            username: process.env.lusername,
+            email: process.env.email,
+            password: process.env.password,
+            country: process.env.country,
+            motherAccount: process.env.motherAccount,
+            hastages: process.env.hastages,
+            bio: process.env.bio,
+            limit: process.env.limit,
+            gmailAccount: process.env.gmailAccount,
+            gmailPassword: process.env.gmailPassword,
+       }
+       
         
 
         allureReporter.addTestId("autmate_001")
@@ -49,6 +53,7 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
             await browser.pause(3000)
 
             await browser.startActivity("com.zhiliaoapp.musically", "com.ss.android.ugc.aweme.splash.SplashActivity")
+            await browser.reset();
 
             await browser.pause(3000)
             /////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +67,7 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
             /////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////
-            //const Account = await Mail.generateAccount()
+            //const Account = await Mail.generateAccount() 
             const prefex = Mail.makeHash(10)
             Account = {...Account , email: `${prefex}${Account.email}`}
 

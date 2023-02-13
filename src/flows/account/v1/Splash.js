@@ -1,10 +1,10 @@
-import SplashOBJ from '../../objects/account/Splash'
+import SplashOBJ from '../../../objects/account/Splash'
 
 class Splash {
 
     async Init() {
 
-        await browser.pause(3000)
+        await browser.pause(1000)
         
         if (await (await SplashOBJ.dialog()).isDisplayed()) {
             await (await SplashOBJ.dialog()).click()
@@ -17,10 +17,22 @@ class Splash {
                 await (await SplashOBJ.start_btn()).click()
 
                 await browser.pause(3000)
+                
+                let counter = 1
 
-                if (await (await SplashOBJ.swape_dialog()).isDisplayed()) {
-                    await SplashOBJ.swape_up()
+                const checkSlider = async () => {
+                    if (counter >= 5) {
+                      return
+                    } else if (await (await SplashOBJ.swape_dialog()).isDisplayed()) {
+                        await SplashOBJ.swape_up()
+                    } else {
+                        counter++
+                        await browser.pause(3000)
+                        await checkSlider()
+                    }
                 }
+
+                await checkSlider()
 
             }//waitUntiCategoriesDisplayed
 

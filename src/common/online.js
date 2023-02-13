@@ -1,4 +1,4 @@
-let dns = require('dns')
+const dns = require('dns')
 
 const isInternetOnline = () => {
     return new Promise((resolve , reject) => {

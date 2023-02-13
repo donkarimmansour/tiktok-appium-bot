@@ -23,17 +23,18 @@ const Send_Confirm_Email = '//*[@text="Resend code"]'
 const Err_Confirm_Email = '//*[@text="Email verification code error"]'
 const Form_Err = '//*[contains(@text,"many")]'
 const Suggest = '//*[@text="Suggest strong password"]'
+const Login_Page = '//*[@text="Log in to TikTok"]'
+const Login_SignUp_BTN = '//*[@text="Don’t have an account? Sign up"]'
+const Birthday_TextBox_View = '//*/android.widget.EditText'
+const Confirm_Code = '//*/android.widget.EditText'
+
 
 ////////////////////////////////////////////////////////////////////////////////////
-const Birthday_TextBox_View = '//*[@resource-id="com.zhiliaoapp.musically:id/cyv"]'
-const Confirm_Code = '//*[@resource-id="com.zhiliaoapp.musically:id/cyc"]'
 // b_day => y
 // b_month => y
 // b_year => y
 ////////////////////////////////////////////////////////////////////////////////////
 
-const Login_Page = '//*[@text="Log in to TikTok"]'
-const Login_SignUp_BTN = '//*[@text="Don’t have an account? Sign up"]'
 
 
 class Signup {

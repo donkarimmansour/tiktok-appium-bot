@@ -47,6 +47,23 @@ class Login {
         return false
     }
 
+    async waitUntilResetFormDisplayed() {
+        await (await $(Reset_Form)).waitForDisplayed()
+        if (await (await $(Reset_Form)).isDisplayed()) return true
+        return false
+    }
+
+    async waitUntilConfirmEmailDisplayed() {
+        await (await $(Confirm_Email)).waitForDisplayed()
+        if (await (await $(Confirm_Email)).isDisplayed()) return true
+        return false
+    }
+
+    async waitUntilConfirmCodeDisplayed() {
+        await (await $(Confirm_Code)).waitForDisplayed()
+        if (await (await $(Confirm_Code)).isDisplayed()) return true
+        return false
+    }
 
 
     async signup_btn() {
@@ -84,6 +101,36 @@ class Login {
     async pass_err() {
         return await $(Pass_Err)
     }
+
+    
+    async account_exist() {
+        return await $(Account_Exist)
+    }
+
+    async send_Confirm_email() {
+        return await $(Send_Confirm_Email)
+    }
+
+    async err_confirm_email() { 
+        return await $(Err_Confirm_Email)
+    }
+
+    async confirm_code() {
+        return await $(Confirm_Code)
+    }
+
+    async reset_btn() {
+        return await $(Reset_BTN)
+    }
+
+    async email_pupup() {
+        return await $(Email_Pupup)
+    }
+
+    async login_form() {
+        return await $(Login_Form)
+    }
+
 
 }
 

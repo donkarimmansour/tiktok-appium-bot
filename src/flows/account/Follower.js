@@ -34,10 +34,15 @@ class Follower {
                         await (await FollowerOBJ.follow_btn()).click()
                         await (await FollowerOBJ.follow_sec()).click()
 
-                        if ((await (await FollowerOBJ.select_profile()).getAttribute("text")) === "Follow") {
+                        //if ((await (await FollowerOBJ.select_profile())?.getAttribute("text")) === "Follow") {
+                        if (await (await FollowerOBJ.select_profile()).isDisplayed()) {
                             counter++
                             await repeater()
                         } else {
+                            await browser.back()
+                            await browser.back()
+                            await browser.back()
+                            await browser.back()
                             return
                         }
 
@@ -78,7 +83,8 @@ class Follower {
 
                             await (await FollowerOBJ.follow_sec()).click()
 
-                            if ((await (await FollowerOBJ.select_profile()).getAttribute("text")) === "Follow") {
+                            //if ((await (await FollowerOBJ.select_profile())?.getAttribute("text")) === "Follow") {
+                            if (await (await FollowerOBJ.select_profile()).isDisplayed()) {
                                 counter++
                                 await repeater()
                             } else {

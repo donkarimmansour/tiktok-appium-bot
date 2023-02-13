@@ -2,7 +2,7 @@ const HOME_ICON = '//*[@text="Home"]'
 const PROFILE_ICON = '//*[@text="Profile"]'
 const Home = '//*[@text="For You"]'
 const DISCOVER_ICON = '//*[@text="Friends"]' //Friends//Now//discover //00000000-0000-0757-ffff-ffff00000038
-const UPLOAD_ICON = '/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/X.TxU/android.widget.TabHost/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout[3]/android.widget.ImageView'
+const UPLOAD_ICON = '/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/*/android.widget.TabHost/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout[3]/android.widget.ImageView'
 
 class NavBar {
 

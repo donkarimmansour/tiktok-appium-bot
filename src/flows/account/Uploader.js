@@ -16,14 +16,16 @@ class Uploader {
             if (await NavBar.wait_until_home_displayed()) {
                 await (await NavBar.upload_icon()).click()
 
-                await browser.pause(2000)
+                await browser.pause(3000)
 
-                if (await (await UploaderOBJ.feature_popup()).isDisplayed()) {
+
+                if (await (await UploaderOBJ.feature_popup()).isDisplayed()) {//
                     await (await UploaderOBJ.accept_popup()).click()
                     await this.UploadVideo()
                     return
                 }
-                if (await (await UploaderOBJ.minutes_popup()).isDisplayed()) {
+
+                if (await (await UploaderOBJ.minutes_popup()).isDisplayed()) {//
                     await (await UploaderOBJ.accept_popup()).click()
                     await this.UploadVideo()
                     return
@@ -38,24 +40,45 @@ class Uploader {
                         await (await UploaderOBJ.video_select()).click()
                         await (await UploaderOBJ.save_btn()).click()
 
+                        await browser.pause(1000)
+                        await (await UploaderOBJ.save_btn()).click()
+
+
+                        await browser.pause(3000)
+
+                        if (await (await UploaderOBJ.feature_popup()).isDisplayed()) {//
+                            await (await UploaderOBJ.accept_popup()).click()
+                            await this.UploadVideo()
+                            return
+                        }
+
+
+
                         if (await UploaderOBJ.waitUntilTextDisplayed()) {
                             await (await UploaderOBJ.textarea()).setValue(this.hastags)
                             await browser.pause(2000)
 
                             if (this.counter === 1) {
+                                await UploaderOBJ.swape_to_top()
                                 await (await UploaderOBJ.option()).click()
 
                                 if (await UploaderOBJ.waitUntilSwitchDisplayed()) {
                                     await (await UploaderOBJ.switch()).click()
-                                    await (await UploaderOBJ.option_close()).click()
+                                    //await (await UploaderOBJ.option_close()).click()
+                                    await browser.back()
                                 }//waitUntilSwitchDisplayed
                             }
 
                             await (await UploaderOBJ.post_btn()).click()
 
-                            await browser.pause(2000)
+                            if (await (await UploaderOBJ.publicly_popup()).isDisplayed()) {//
+                                await (await UploaderOBJ.publicly_btn()).click()
+                            }
 
-                            if (await (await UploaderOBJ.viewfriends_popup()).isDisplayed()) {
+
+                            await browser.pause(3000)
+
+                            if (await (await UploaderOBJ.viewfriends_popup()).isDisplayed()) {//
                                 await (await UploaderOBJ.accept_popup()).click()
                             }
             

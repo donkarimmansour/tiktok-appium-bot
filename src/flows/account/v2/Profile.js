@@ -1,5 +1,5 @@
-import NavBar from '../../objects/common/NavBar'
-import ProfileOBJ from '../../objects/account/Profile'
+import NavBar from '../../../objects/common/NavBar'
+import ProfileOBJ from '../../../objects/account/Profile' 
  
 class Profile {
 
