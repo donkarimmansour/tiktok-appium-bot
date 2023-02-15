@@ -114,7 +114,7 @@ const getRow = async () => {
     // Get all the rows
     let rows = await sheet.getRows()
 
-    const row = {}
+    let row = {}
 
     for (let index = 0 ; index < rows.length ; index++) {
         if (rows[index]["used"] !== "yes") {

@@ -5,6 +5,9 @@ const cp = require('child_process')
 const { List, Settings, Confirm, Start, Current } = require('./cli/questions')
 const appium = require('appium')
 const { updateAttributeEnv } = require('./common/helper')
+const dotenv = require('dotenv')
+dotenv.config()
+
 // const clui = require('clui')
 // const chalk = require('chalk')
 
@@ -33,8 +36,19 @@ const main = async choose => {
             const current = await Current()
             updateAttributeEnv("current", current)
         }
-        await appium.main({ port: 4723, address: "127.0.0.1" })
-        cp.exec('start cmd.exe /K npm run wdio')
+        a//wait appium.main({ port: 4723, address: "127.0.0.1" })
+
+        if(process.env.version == 1){
+             cp.exec('start cmd.exe /K appium --address 127.0.0.1 --port 4723  && npm run v1')
+
+            //cp.exec('npm run v1')
+        }else if(process.env.version == 2){
+            cp.exec('start cmd.exe /K appium --address 127.0.0.1 --port 4723  && npm run v2')
+
+            //cp.exec('npm run v2')
+        }
+
+        //cp.exec('start cmd.exe /K appium --address 127.0.0.1 --port 4723  && npm run wdio')
 
         clear()
         choose = await List(["end" , "clear"])

@@ -12,11 +12,11 @@ class Splash {
             if (await SplashOBJ.waitUntilSwapeDisplayed()) {
                 await (await SplashOBJ.start_btn()).click() 
 
-                await browser.pause(3000)
+                // await browser.pause(3000)
 
-                if (await (await SplashOBJ.swape_dialog()).isDisplayed()) {
-                    await SplashOBJ.swape_up()
-                }
+                // if (await (await SplashOBJ.swape_dialog()).isDisplayed()) {
+                //     await SplashOBJ.swape_up()
+                // }
 
                 // let counter = 1
 

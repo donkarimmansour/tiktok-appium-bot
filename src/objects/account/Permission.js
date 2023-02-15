@@ -7,37 +7,37 @@ const Per_Deny = '//*[@text="Deny"]'
 
 class Permission {
 
-    async waitUntilConMessageDisplayed() {
-        await (await $(Per_Con_Message)).waitForDisplayed()
-        if (await (await $(Per_Con_Message)).isDisplayed()) return true
-        return false
-    }
+    // async waitUntilConMessageDisplayed() {
+    //     await (await $(Per_Con_Message)).waitForDisplayed()
+    //     if (await (await $(Per_Con_Message)).isDisplayed()) return true
+    //     return false
+    // }
 
-    async waitUntilVedMessageDisplayed() {
-        await (await $(Per_Ved_Message)).waitForDisplayed()
-        if (await (await $(Per_Ved_Message)).isDisplayed()) return true
-        return false
-    }
+    // async waitUntilVedMessageDisplayed() {
+    //     await (await $(Per_Ved_Message)).waitForDisplayed()
+    //     if (await (await $(Per_Ved_Message)).isDisplayed()) return true
+    //     return false
+    // }
 
-    async waitUntilAudMessageDisplayed() {
-        await (await $(Per_Aud_Message)).waitForDisplayed()
-        if (await (await $(Per_Aud_Message)).isDisplayed()) return true
-        return false
-    }
+    // async waitUntilAudMessageDisplayed() {
+    //     await (await $(Per_Aud_Message)).waitForDisplayed()
+    //     if (await (await $(Per_Aud_Message)).isDisplayed()) return true
+    //     return false
+    // }
 
-    async waitUntilImgMessageDisplayed() {
-        await (await $(Per_Img_Message)).waitForDisplayed()
-        if (await (await $(Per_Img_Message)).isDisplayed()) return true
-        return false
-    }
+    // async waitUntilImgMessageDisplayed() {
+    //     await (await $(Per_Img_Message)).waitForDisplayed()
+    //     if (await (await $(Per_Img_Message)).isDisplayed()) return true
+    //     return false
+    // }
 
-    async per_allow() {
-        return await $(Per_Allow)
-    }
+    // async per_allow() {
+    //     return await $(Per_Allow)
+    // }
 
-    async per_deny() {
-        return await $(Per_Deny)
-    }
+    // async per_deny() {
+    //     return await $(Per_Deny)
+    // }
 
 
 }

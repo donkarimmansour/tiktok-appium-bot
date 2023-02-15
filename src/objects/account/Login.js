@@ -12,6 +12,16 @@ const Submit_BTN = '(//*[@text="Log in"])[last()]'
 const Email_Err = '//*[contains(@text,"many")]'
 const Pass_Err = '//*[@text="Incorrect account or password"]'
 
+//////////////////////////////////////////////////////////////////////////////////////
+// const Account_Exist = '//*[@text="You’ve already signed up"]' 
+// const Email_Pupup = '//*[@text="Email"]'
+// const Reset_Form = '//*[@text="Forgot password"]'
+// const Reset_BTN = '//*[@text="Reset"]' 
+// const Confirm_Email = '//*[@text="Enter 6-digit code"]'
+// const Confirm_Code = '//*/android.widget.EditText'
+// const Err_Confirm_Email = '//*[@text="Email verification code error"]'
+// const Send_Confirm_Email = '//*[@text="Resend code"]' 
+//////////////////////////////////////////////////////////////////////////////////////
 
 class Login {
 
@@ -47,23 +57,23 @@ class Login {
         return false
     }
 
-    async waitUntilResetFormDisplayed() {
-        await (await $(Reset_Form)).waitForDisplayed()
-        if (await (await $(Reset_Form)).isDisplayed()) return true
-        return false
-    }
+    // async waitUntilResetFormDisplayed() {
+    //     await (await $(Reset_Form)).waitForDisplayed()
+    //     if (await (await $(Reset_Form)).isDisplayed()) return true
+    //     return false
+    // }
 
-    async waitUntilConfirmEmailDisplayed() {
-        await (await $(Confirm_Email)).waitForDisplayed()
-        if (await (await $(Confirm_Email)).isDisplayed()) return true
-        return false
-    }
+    // async waitUntilConfirmEmailDisplayed() {
+    //     await (await $(Confirm_Email)).waitForDisplayed()
+    //     if (await (await $(Confirm_Email)).isDisplayed()) return true
+    //     return false
+    // }
 
-    async waitUntilConfirmCodeDisplayed() {
-        await (await $(Confirm_Code)).waitForDisplayed()
-        if (await (await $(Confirm_Code)).isDisplayed()) return true
-        return false
-    }
+    // async waitUntilConfirmCodeDisplayed() {
+    //     await (await $(Confirm_Code)).waitForDisplayed()
+    //     if (await (await $(Confirm_Code)).isDisplayed()) return true
+    //     return false
+    // }
 
 
     async signup_btn() {
@@ -103,33 +113,33 @@ class Login {
     }
 
     
-    async account_exist() {
-        return await $(Account_Exist)
-    }
+    // async account_exist() {
+    //     return await $(Account_Exist)
+    // }
 
-    async send_Confirm_email() {
-        return await $(Send_Confirm_Email)
-    }
+    // async send_Confirm_email() {
+    //     return await $(Send_Confirm_Email)
+    // }
 
-    async err_confirm_email() { 
-        return await $(Err_Confirm_Email)
-    }
+    // async err_confirm_email() { 
+    //     return await $(Err_Confirm_Email)
+    // }
 
-    async confirm_code() {
-        return await $(Confirm_Code)
-    }
+    // async confirm_code() {
+    //     return await $(Confirm_Code)
+    // }
 
-    async reset_btn() {
-        return await $(Reset_BTN)
-    }
+    // async reset_btn() {
+    //     return await $(Reset_BTN)
+    // }
 
-    async email_pupup() {
-        return await $(Email_Pupup)
-    }
+    // async email_pupup() {
+    //     return await $(Email_Pupup)
+    // }
 
-    async login_form() {
-        return await $(Login_Form)
-    }
+    // async login_form() {
+    //     return await $(Login_Form)
+    // }
 
 
 }

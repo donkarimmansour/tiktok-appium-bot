@@ -6,8 +6,8 @@ CREDENTIALS=secret.json
 nickname=fortnight1
 lusername=Fortnite
 password=mmmm@1111
-source=33mail #temporary/#33mail
-type=signup  #login/#signup
+source=temporary #temporary/#33mail
+type=login  #login/#signup
 
 #link account
 motherAccount=@kings_coins
@@ -33,8 +33,8 @@ gmailAccount=mycpa2023@gmail.com
 gmailPassword=tkorczgupdhvwaks
 
 #job
-start=new  #new/#current
-current=upload  #follow/#edit/#upload/#all
+start=signup  #new/#current
+current=follow  #follow/#edit/#upload/#all
 
 ######################
 version=2  #1/#2
@@ -43,3 +43,5 @@ version=2  #1/#2
 #country=Ireland
 #created_at=02/09/2023
 #birthday=02/09/2023
+
+

@@ -1,9 +1,14 @@
 const Conect_Err = '//*[@text="It’s taking a bit longer than usual"]'
 const Conecting = '//*[@text="Finding the best server…"]'
 const Conect_Try_Again = '//*[@text="TRY AGAIN"]'
+const Disconnect_BTN = '//*[@text="DISCONNECT"]'
 
+
+////////////////////////////////////////////////////////////////////
 // const Conect_Country = '//*[@text="Ireland"]'
 // const Conected = '//*[contains(@text,"Connected to Ireland")]'
+////////////////////////////////////////////////////////////////////
+
 
 class NordVpn {
 
@@ -53,6 +58,10 @@ class NordVpn {
 
     async conect_try_again() {
         return await $(Conect_Try_Again)
+    }
+
+    async disconnect_btn() {
+        return await $(Disconnect_BTN)
     }
 
 }

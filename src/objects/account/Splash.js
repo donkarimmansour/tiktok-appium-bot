@@ -3,7 +3,7 @@ const Categories_Page = '//*[@text="Choose your interests"]'
 const Skip_BTN = '//*[@text="Skip"]'
 const Swape_PAGE = '//*[@text="Swipe up"]'
 const Start_BTN = '//*[@text="Start watching"]'
-const Swape_Dialog = '//*[@text="Swipe up for more"]'
+
 // const DIALOG_PAGE = '//*[@text="..."]'
 // const CLOSE_BTN = '//*[@text="..."]'
 // const TELE_PAGE = '//*[@text="..."]'
@@ -37,39 +37,7 @@ class Splash {
         return await $(Start_BTN)
     }
 
-    async swape_dialog(){
-        return await $(Swape_Dialog)
-    }
-
-    async swape_up(){
-
-        await driver.touchPerform([
-                {
-                    action: 'press',
-                    options: {
-                        x: 500,
-                        y: 1700
-                    }
-                },
-                {
-                    action: 'wait',
-                    options: {ms: 1000}
-                },
-                {
-                    action: 'moveTo',
-                    options: {
-                        x: 500,
-                        y: 300
-                    }
-                },
-                {
-                    action: 'release',
-                    options: {}
-                }
-            ])
-
-    }
-
+    
 
 }
 export default new Splash()

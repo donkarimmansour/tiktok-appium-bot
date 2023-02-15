@@ -24,9 +24,14 @@ const getVerificationCode = (user, password) => new Promise(async (resolve, reje
 
         await connection_inbox.search(['All'], { bodies: ['HEADER', 'TEXT'], markSeen: false }).then(async messages => {
 
-          const extractMessages = messages.filter(msg =>
-             msg.parts[1]?.body['from'][0] === "\"TikTok 'noreply@account.tiktok.com' via 33Mail\" <sender@mailer1.33mail.com>" ? msg : null
-          )
+          const extractMessages = messages.filter(async (msg) => {
+            if(msg.parts[1]?.body['from'][0] === "\"TikTok 'noreply@account.tiktok.com' via 33Mail\" <sender@mailer1.33mail.com>"){
+               return msg
+            }else{
+              await connection_inbox.moveMessage(msg.attributes.uid, '[Gmail]/Trash')
+              return null
+            }
+          })
 
 
           if (extractMessages.length > 0) {

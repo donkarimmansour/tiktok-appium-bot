@@ -1,5 +1,5 @@
 import Signup from '../../flows/account/Signup'
-import allureReporter from '@wdio/allure-reporter'
+// import allureReporter from '@wdio/allure-reporter'
 //import Mail from '../../common/mail'
 import Mail from '../../common/gmail'
 import isInternetOnline from '../../common/online';
@@ -8,8 +8,8 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
 
     it('Signup', async () => {
 
-        allureReporter.addTestId("Signup_001")
-        allureReporter.addSeverity("normal")
+        // allureReporter.addTestId("Signup_001")
+        // allureReporter.addSeverity("normal")
 
         try {
             await isInternetOnline()

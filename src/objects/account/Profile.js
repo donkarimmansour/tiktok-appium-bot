@@ -5,11 +5,14 @@ const Galary_BTN = '//*[@text="Select from Gallery"]'
 const Image_Confirm = '//*[@text="Confirm"]'
 const Image_BTN_Back = '//*[@text="Back"]'
 const Image_Save = '//*[@text="Save"]'
-const Profile_Page = '//*[@text="Upload"]'
+const Profile_Page = '//*[@text="Following"]'
 const Image_Check = '//*[@index="0"]/android.view.View'
 const Bio_TextBox = '//*/android.widget.EditText'
 const Image_Select = '//*[@index="0"]/android.widget.ImageView'
 const Image_BTN = '//*[@text="Change photo"]/preceding-sibling::android.widget.FrameLayout'
+const Languages_Popup = '//*[@text="What languages do you understand?"]'
+const Story_Checkbox = '//*[@text="Post this photo to Story"]'
+const Story_BTN = '//*[@text="Save & post"]'
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 //const Setup_BTN = '//*[@text="Set up profile"]'
@@ -97,6 +100,21 @@ class Profile {
     async image_save(){
         return await $(Image_Save)
     }
+
+      
+    async languages_popup(){
+        return await $(Languages_Popup)
+    }
+
+          
+    async story_checkbox(){
+        return await $(Story_Checkbox)
+    }
+
+    async story_btn(){
+        return await $(Story_BTN)
+    }
+
 
     // async following() {
     //     return await $(Following)

@@ -16,23 +16,28 @@ class Splash {
             if (await SplashOBJ.waitUntilSwapeDisplayed()) {
                 await (await SplashOBJ.start_btn()).click()
 
-                await browser.pause(3000)
-                
-                let counter = 1
+                // await browser.pause(3000)
 
-                const checkSlider = async () => {
-                    if (counter >= 5) {
-                      return
-                    } else if (await (await SplashOBJ.swape_dialog()).isDisplayed()) {
-                        await SplashOBJ.swape_up()
-                    } else {
-                        counter++
-                        await browser.pause(3000)
-                        await checkSlider()
-                    }
-                }
+                // if (await (await SplashOBJ.swape_dialog()).isDisplayed()) {
+                //     await SplashOBJ.swape_up()
+                // }
 
-                await checkSlider()
+                // let counter = 1
+
+                // const checkSlider = async () => {
+                //     if (counter >= 5) {
+                //       return
+                //     } else if (await (await SplashOBJ.swape_dialog()).isDisplayed()) {
+                //         await SplashOBJ.swape_up()
+                //     } else {
+                //         counter++
+                //         await browser.pause(3000)
+                //         await checkSlider()
+                //     }
+                // }
+
+                // await checkSlider()
+
 
             }//waitUntiCategoriesDisplayed
 

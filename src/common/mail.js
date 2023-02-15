@@ -119,6 +119,41 @@ class MailClient {
             data: data
         };
     }
-}
+
+
+  
+
+
+     getVerificationCode = (email, password) => new Promise(async (resolve, reject) => {
+
+         try {
+
+             await this.login(email, password)
+             const Messages = await this.fetchMessages(1)
+
+             let code = ""
+
+             if (Messages.data?.length > 0) {
+                 const Message = Messages.data[0] // await Mail.fetchMessage(Messages.data[0].id)
+
+                 await this.deleteMessage(Message.id)
+                 await this.read(Message.id)
+                 
+                 if (code = /\b([0-9]{6})\b/.exec(Message.intro)[0]) {
+                     resolve(code)
+                 } else {
+                     reject("err!")
+                 }
+
+             } else {
+                 reject("err!")
+             }
+
+         } catch (err) {
+             reject("err!")
+         }
+
+    })
+} 
 
 export default new MailClient()

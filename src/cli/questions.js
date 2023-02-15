@@ -24,6 +24,15 @@ const Current = async () => {
 const Settings = async () => {
     const questions = [
         {
+            type: 'list', name: 'version', message: `enter version (${process.env.version})`, choices: ["1", "2"],
+            default() { return process.env.version },
+            filter(value) {
+                updateAttributeEnv("version", value)
+                return true
+            }
+        },
+        /////////////////////////////////////////////////////////////////////////////////////////
+        {
             type: 'list', name: 'type', message: `enter type (${process.env.type})`, choices: ["signup", "login"],
             default() { return process.env.type },
             filter(value) {
@@ -142,10 +151,19 @@ const Settings = async () => {
 
         /////////////////////////////////////////////////////////////////////////////////////////
         {
-            type: 'number', name: 'limit', message: "enter limit",
-            default() { return process.env.limit },
+            type: 'number', name: 'accountLimit', message: "enter account limit",
+            default() { return process.env.accountLimit },
             validate(value) {
-                updateAttributeEnv("limit", value)
+                updateAttributeEnv("accountLimit", value)
+                return true
+            }
+        },
+         /////////////////////////////////////////////////////////////////////////////////////////
+         {
+            type: 'number', name: 'uploadLimit', message: "enter upload limit",
+            default() { return process.env.uploadLimit },
+            validate(value) {
+                updateAttributeEnv("uploadLimit", value)
                 return true
             }
         },
@@ -155,9 +173,8 @@ const Settings = async () => {
             default() { return process.env.source },
             filter(value) {
                 updateAttributeEnv("source", value)
-                return true
-            },
-            when(answers) { return answers.source }
+                return value
+            }
         },
         /////////////////////////////////////////////////////////////////////////////////////////
         {

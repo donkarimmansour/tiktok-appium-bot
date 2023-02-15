@@ -58,7 +58,7 @@ class Signup {
                             await (await SignupOBJ.submit()).click()
 
                             //await browser.pause(10000)
-
+ 
                             ////////////////////////////////////////////////////////////////////////////////////////
                             ////////////////////////////////////////////////////////////////////////////////////////
                             ////////////////////////////////////////////////////////////////////////////////////////
@@ -138,6 +138,7 @@ class Signup {
                         console.log("account_exist");
                         console.log("account_exist");
                         console.log("account_exist");
+                        
                     } else if (await (await SignupOBJ.form_err()).isDisplayed()) {
                         console.log("form_err");
                         console.log("form_err");
@@ -145,13 +146,12 @@ class Signup {
                     }
 
 
-
+ 
                 } else {
-                    await browser.pause(3000)
 
-                    if (await (await SignupOBJ.suggest()).isDisplayed()) {
-                        await SignupOBJ.click_on_screan()
-                    }
+                    // if (await (await SignupOBJ.suggest()).isDisplayed()) {
+                    //     await SignupOBJ.click_on_screan()
+                    // }
 
 
                     if (await SignupOBJ.waitUntilPassFormDisplayed()) {
@@ -206,17 +206,7 @@ class Signup {
                                            code = await Mail.getVerificationCode(this.Account.gmailAccount, this.Account.gmailPassword)
 
                                     } else if (this.Account.source === "temporary") {
-
-                                        const Account = await Mail2.login(this.email, this.password)
-                                        const Messages = await Mail2.fetchMessages(1)
-
-                                        if (Messages.data?.length > 0) {
-                                            const Message = Messages.data[0] // await Mail.fetchMessage(Messages.data[0].id)
-                                            code = /\b([0-9]{6})\b/.exec(Message.intro)[0]
-                                            await Mail2.deleteMessage(Message.id)
-                                            await Mail2.read(Message.id)
-                                        }
-
+                                           code = await Mail2.getVerificationCode(this.Account.email, this.Account.password)
                                     }
 
                                     if (code !== "") {
@@ -321,17 +311,20 @@ class Signup {
                             //////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////
-                            if (await SignupOBJ.waitUntilUsernameFormDisplayed()) {
+                            //if (await SignupOBJ.waitUntilUsernameFormDisplayed()) {
+                            if (await SignupOBJ.waitUntilNicknameFormDisplayed()) {
 
-                                await (await SignupOBJ.username_textBox()).setValue(this.Account.username)
-                                await (await SignupOBJ.confirm_signup()).click()
+                                // await (await SignupOBJ.username_textBox()).setValue(this.Account.username)
+                                // await (await SignupOBJ.confirm_signup()).click()
 
-                                await browser.pause(3000)
-                                if (await (await SignupOBJ.skip_btn()).isDisplayed()) {
-                                    await (await SignupOBJ.skip_btn()).click()
-                                }
+                                // await browser.pause(3000)
 
+                                // if (await (await SignupOBJ.skip_btn()).isDisplayed()) {
+                                //     await (await SignupOBJ.skip_btn()).click()
+                                // }
 
+                                await (await SignupOBJ.nickname_textBox()).setValue(this.Account.nickname)
+                                await (await SignupOBJ.confirm_btn()).click()
 
                                 this.Account.created_at = moment(Date.now()).format('L')
                                 await this.saveAccount()

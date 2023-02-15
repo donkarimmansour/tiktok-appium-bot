@@ -1,16 +1,16 @@
 const SearchBtn = '//*[@text="Search"]'
 const UserTap = '//*[@text="Users"]' //00000000-0000-0954-ffff-ffff00000337
 const FollowBtn = '//*[@text="Follow"]'
+const FollowedBtn = '//*[@text="Following"]'
 const SelectProfile = '//*[@text="Follow"]'
 const SearchBox = '//*/android.widget.EditText'
-const SearchIcon = '/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/*/android.widget.TabHost/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ImageView[2]'
+const SearchIcon = '//*/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ImageView[2]'
 const FollowSec = '//*/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.RelativeLayout'
-
+                                                                                                                        
 ///////////////////////////////////////////////////////////////////////////////////
 // const BackBtn = '/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout[1]/android.widget.ImageView'
 // const BackBtn2 = '//*[@resource-id="com.zhiliaoapp.musically:id/a0e"]'
 ///////////////////////////////////////////////////////////////////////////////////
-
 
 class Follower {
 
@@ -46,6 +46,10 @@ class Follower {
 
     async select_profile(){
         return await $(SelectProfile)
+    }
+
+    async followed_btn(){
+        return await $(FollowedBtn)
     }
 
     // async back_btn(){

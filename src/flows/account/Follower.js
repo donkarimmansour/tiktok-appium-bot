@@ -1,6 +1,6 @@
 import NavBar from '../../objects/common/NavBar'
 import FollowerOBJ from '../../objects/account/Follower'
-import allureReporter from '@wdio/allure-reporter'
+// import allureReporter from '@wdio/allure-reporter'
 import { soundPlayer } from 'x-sound-player'
 import { join } from "path";
 
@@ -12,7 +12,7 @@ class Follower {
     }
 
     async followMotherAccount() {
-        allureReporter.addStep(`go to search section`)
+       // allureReporter.addStep(`go to search section`)
 
 
         if (await NavBar.wait_until_home_displayed()) {
@@ -25,12 +25,20 @@ class Follower {
                 await (await FollowerOBJ.user_tap()).click()
 
 
-                let counter = 1
+                await browser.pause(3000)
+                
+                if(await (await FollowerOBJ.followed_btn()).isDisplayed()){
+                    return
+                }
 
+
+                let counter = 1
 
                 async function repeater() {
 
                     if (counter === 1) {
+
+
                         await (await FollowerOBJ.follow_btn()).click()
                         await (await FollowerOBJ.follow_sec()).click()
 
@@ -88,6 +96,10 @@ class Follower {
                                 counter++
                                 await repeater()
                             } else {
+                                await browser.back()
+                                await browser.back()
+                                await browser.back()
+                                await browser.back()
                                 return
                             }
                         }
@@ -101,8 +113,6 @@ class Follower {
             }
         }
 
-
-        return this;
     }
 
 }

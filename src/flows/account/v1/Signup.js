@@ -5,6 +5,7 @@ import moment from 'moment'
 import { join } from "path";
 import Mail from '../../../common/gmail'
 import { addRow } from '../../../common/helper';
+import Mail2 from '../../../common/mail'
 import NavBar from '../../../objects/common/NavBar';
 
 
@@ -83,11 +84,10 @@ class Signup {
 
 
                             } else {
-                                await browser.pause(3000)
 
-                                if (await (await SignupOBJ.suggest()).isDisplayed()) {
-                                    await SignupOBJ.click_on_screan()
-                                }
+                                // if (await (await SignupOBJ.suggest()).isDisplayed()) {
+                                //     await SignupOBJ.click_on_screan()
+                                // }
 
 
                                 if (await SignupOBJ.waitUntilPassFormDisplayed()) {
@@ -173,19 +173,18 @@ class Signup {
 
                                                     const checkCode = async () => {
                                                         try {
-                                                            // const Account = await Mail.login(this.email, this.password)
-                                                            // const Messages = await Mail.fetchMessages(1)
 
-                                                            // if (Messages.data?.length > 0) {
-                                                            //     const Message = Messages.data[0] // await Mail.fetchMessage(Messages.data[0].id)
-                                                            //     const code = /\b([0-9]{6})\b/.exec(Message.intro)[0]
-                                                            //        await Mail.deleteMessage(Message.id)
-                                                            //        await Mail.read(Message.id)
-                                                            // } else {
-                                                            //     await checkCode()
-                                                            // }
+                                                            let code = ""
 
-                                                            const code = await Mail.getVerificationCode(this.Account.gmailAccount, this.Account.gmailPassword)
+                                                            if (this.Account.source === "33mail") {
+
+                                                                code = await Mail.getVerificationCode(this.Account.gmailAccount, this.Account.gmailPassword)
+
+                                                            } else if (this.Account.source === "temporary") {
+                                                                code = await Mail2.getVerificationCode(this.Account.email, this.Account.password)
+                                                            }
+
+                                                        if (code !== "") {
 
                                                             console.log("code ", code);
                                                             console.log("code ", code);
@@ -258,6 +257,11 @@ class Signup {
 
 
 
+                                                            }//if
+                                                            else {
+                                                                await checkCode()
+                                                            }
+
 
 
                                                         } catch (error) {
@@ -325,14 +329,15 @@ class Signup {
     nicknameSetp = async () => {
 
         if (await SignupOBJ.waitUntilNicknameFormDisplayed()) {
-            await (await SignupOBJ.nickname_textBox()).setValue(this.Account.username)
+            await (await SignupOBJ.nickname_textBox()).setValue(this.Account.nickname)
             await (await SignupOBJ.confirm_btn()).click()
 
-            await browser.pause(10000)
+            await browser.pause(3000)
+
             await (await NavBar.home_icon()).click()
 
             if (await NavBar.wait_until_home_displayed()) {
-               
+
                 this.Account.created_at = moment(Date.now()).format('L')
                 await this.saveAccount()
 

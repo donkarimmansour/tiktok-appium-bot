@@ -1,11 +1,11 @@
 import Follower from '../../flows/account/Follower'
-import allureReporter from '@wdio/allure-reporter'
+// import allureReporter from '@wdio/allure-reporter'
 
 describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
 
     it('Follow Mother Account', async () => {
-        allureReporter.addTestId("follow_001")
-        allureReporter.addSeverity("normal")
+        // allureReporter.addTestId("follow_001")
+        // allureReporter.addSeverity("normal")
  
        // await browser.pause(20000)
 

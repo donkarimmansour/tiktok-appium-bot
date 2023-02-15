@@ -13,9 +13,12 @@ const Video_Tap = '//*[@text="Videos"]'
 const textArea = '//*[@text="Describe your post, add hashtags, or mention creators that inspired you"]'
 const Option = '//*[@text="More options"]'
 const Switch = '//*[@text="Save to device"]'
+const Switch_BTN = '//*[@text="Save to device"]/following-sibling::android.widget.FrameLayout/android.widget.Switch[@text="‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‎‎‏‏‏‎‏‎‏‏‏‎‎‏‎‏‏‎‏‎‏‏‎‏‎‏‏‎‎‏‎‏‏‎‎‏‏‎‎‎‏‏‎‎‎‎‏‏‏‎‏‎‎‎‎‎‏‎‎‏‎OFF‎‏‎‎‏‎"]'
 const Post_BTN = '(//*[@text="Post"])[last()]'
 const isUploding = '//*[contains(@text,"%")]'
 const Video_Select = '//*[@index="0"]/android.view.View'
+
+//ON‎‏‎‎‏‎ != ON
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,6 +64,10 @@ class Uploader {
 
     async switch() {
         return await $(Switch)
+    }
+
+    async switch_btn() {
+        return await $(Switch_BTN)
     }
 
     // async option_close() {
