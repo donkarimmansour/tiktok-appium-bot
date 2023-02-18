@@ -23,14 +23,14 @@ const Current = async () => {
 
 const Settings = async () => {
     const questions = [
-        {
-            type: 'list', name: 'version', message: `enter version (${process.env.version})`, choices: ["1", "2"],
-            default() { return process.env.version },
-            filter(value) {
-                updateAttributeEnv("version", value)
-                return true
-            }
-        },
+        // {
+        //     type: 'list', name: 'version', message: `enter version (${process.env.version})`, choices: ["1", "2"],
+        //     default() { return process.env.version },
+        //     filter(value) {
+        //         updateAttributeEnv("version", value)
+        //         return true
+        //     }
+        // },
         /////////////////////////////////////////////////////////////////////////////////////////
         {
             type: 'list', name: 'type', message: `enter type (${process.env.type})`, choices: ["signup", "login"],

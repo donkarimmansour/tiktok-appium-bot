@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "imap-simple": "^5.1.0"
+    "imap-simple": "^5.1.0",
+    "tiktok-scraper-ts": "^1.4.1"
   }
 }

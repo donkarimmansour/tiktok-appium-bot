@@ -15,77 +15,80 @@ class Signup {
 
     async CreateNewAccount() {
 
+        await browser.pause(5000)
 
-        if (await SignupOBJ.waitUntilLoginPageDisplayed()) {
+        if (await (await SignupOBJ.login_page()).isDisplayed()) {
             await (await SignupOBJ.login_signUp_btn()).click()
-
-            if (await SignupOBJ.waitUntilSignUpPageDisplayed()) {
-                await (await SignupOBJ.email_btn()).click()
+        }
 
 
-                if (await SignupOBJ.waitUntilBirthdayFormDisplayed()) {
+        if (await SignupOBJ.waitUntilSignUpPageDisplayed()) {
+            await (await SignupOBJ.email_btn()).click()
 
-                    const days = []
-                    const monthes = []
-                    const years = []
 
-                    for (let i = 0; i < 3; i++) {
-                        days.push(await SignupOBJ.b_day())
+            if (await SignupOBJ.waitUntilBirthdayFormDisplayed()) {
+
+                const days = []
+                const monthes = []
+                const years = []
+
+                for (let i = 0; i < 3; i++) {
+                    days.push(await SignupOBJ.b_day())
+                }
+
+
+                for (let i = 0; i < 2; i++) {
+                    monthes.push(await SignupOBJ.b_month())
+                }
+
+
+                for (let i = 0; i < 6; i++) {
+                    years.push(await SignupOBJ.b_year())
+                }
+
+
+                await Promise.all(days)
+                await Promise.all(monthes)
+                await Promise.all(years)
+
+
+                const checkDate = async () => {
+                    const date = await (await SignupOBJ.birthday_textBox_view()).getAttribute("text")
+
+                    if (moment(Date.now()).diff(new Date(date), "years") > 20) {
+                        this.Account.birthday = moment(new Date(date)).format('L')
+
+                        await (await SignupOBJ.submit()).click()
+
+                        //await browser.pause(10000)
+
+                        ////////////////////////////////////////////////////////////////////////////////////////
+                        ////////////////////////////////////////////////////////////////////////////////////////
+                        ////////////////////////////////////////////////////////////////////////////////////////
+
+                        await this.emailSetp()
+
+                        ////////////////////////////////////////////////////////////////////////////////////////
+                        ////////////////////////////////////////////////////////////////////////////////////////
+                        ////////////////////////////////////////////////////////////////////////////////////////
+
+
+                    } else {
+                        await SignupOBJ.b_year()
+                        await SignupOBJ.b_year()
+
+                        await checkDate()
                     }
+                }
 
-
-                    for (let i = 0; i < 2; i++) {
-                        monthes.push(await SignupOBJ.b_month())
-                    }
-
-
-                    for (let i = 0; i < 6; i++) {
-                        years.push(await SignupOBJ.b_year())
-                    }
-
-
-                    await Promise.all(days)
-                    await Promise.all(monthes)
-                    await Promise.all(years)
-
-
-                    const checkDate = async () => {
-                        const date = await (await SignupOBJ.birthday_textBox_view()).getAttribute("text")
-
-                        if (moment(Date.now()).diff(new Date(date), "years") > 20) {
-                            this.Account.birthday = moment(new Date(date)).format('L')
-
-                            await (await SignupOBJ.submit()).click()
-
-                            //await browser.pause(10000)
- 
-                            ////////////////////////////////////////////////////////////////////////////////////////
-                            ////////////////////////////////////////////////////////////////////////////////////////
-                            ////////////////////////////////////////////////////////////////////////////////////////
-
-                            await this.emailSetp()
-
-                            ////////////////////////////////////////////////////////////////////////////////////////
-                            ////////////////////////////////////////////////////////////////////////////////////////
-                            ////////////////////////////////////////////////////////////////////////////////////////
-
-
-                        } else {
-                            await SignupOBJ.b_year()
-                            await SignupOBJ.b_year()
-
-                            await checkDate()
-                        }
-                    }
-
-                    await checkDate()
-                }//waitUntilBirthdayFormDisplayed
+                await checkDate()
+            }//waitUntilBirthdayFormDisplayed
 
 
 
-            }//waitUntilSignUpPageDisplayed
+        }//waitUntilSignUpPageDisplayed
 
-        }//waitUntilLoginPageDisplayed
+       
 
     }
 
@@ -99,6 +102,7 @@ class Signup {
 
             if (await SignupOBJ.waitUntilEmailFormDisplayed()) {
                 await (await SignupOBJ.email_textBox()).setValue(this.Account.email)
+                await browser.hideKeyboard()
                 await browser.pause(1000)
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -156,6 +160,7 @@ class Signup {
 
                     if (await SignupOBJ.waitUntilPassFormDisplayed()) {
                         await (await SignupOBJ.pass_textBox()).setValue(this.Account.password)
+                        await browser.hideKeyboard()
                         await browser.pause(1000)
 
 
@@ -164,7 +169,7 @@ class Signup {
                         /////////////////////////////////////////////////////////////////////////////////////////////
                         await (await SignupOBJ.submit()).click()
 
-                        await browser.pause(15000)
+                        await browser.pause(30000)
 
                         const checkCaptcha2 = async () => {
                             if (await (await CaptchaOBJ.cap_rotate()).isDisplayed()) {
@@ -240,7 +245,8 @@ class Signup {
                                             await browser.pause(1000)
 
                                             await (await SignupOBJ.confirm_code()).addValue(code[5])
-
+                                          
+                                            await browser.hideKeyboard()
                                             await browser.pause(3000)
 
                                             if (await (await SignupOBJ.err_confirm_email()).isDisplayed()) {
@@ -252,27 +258,13 @@ class Signup {
                                                 await checkCode()
 
                                             } else {
+
                                                 //////////////////////////////////////////////////////////////
                                                 //////////////////////////////////////////////////////////////
                                                 //////////////////////////////////////////////////////////////
-                                                if (await SignupOBJ.waitUntilUsernameFormDisplayed()) {
 
-                                                    await (await SignupOBJ.username_textBox()).setValue(this.Account.username)
-                                                    await (await SignupOBJ.confirm_signup()).click()
+                                                this.username()
 
-                                                    await browser.pause(3000)
-                                                    if (await (await SignupOBJ.skip_btn()).isDisplayed()) {
-                                                        await (await SignupOBJ.skip_btn()).click()
-                                                    }
-
-
-
-                                                    this.Account.created_at = moment(Date.now()).format('L')
-                                                    await this.saveAccount()
-
-                                                    await browser.pause(1000)
-
-                                                }//waitUntilUsernameFormDisplayed
                                                 //////////////////////////////////////////////////////////////
                                                 //////////////////////////////////////////////////////////////
                                                 //////////////////////////////////////////////////////////////
@@ -311,36 +303,12 @@ class Signup {
                             //////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////
-                            //if (await SignupOBJ.waitUntilUsernameFormDisplayed()) {
-                            if (await SignupOBJ.waitUntilNicknameFormDisplayed()) {
 
-                                // await (await SignupOBJ.username_textBox()).setValue(this.Account.username)
-                                // await (await SignupOBJ.confirm_signup()).click()
+                            this.username()
 
-                                // await browser.pause(3000)
-
-                                // if (await (await SignupOBJ.skip_btn()).isDisplayed()) {
-                                //     await (await SignupOBJ.skip_btn()).click()
-                                // }
-
-                                await (await SignupOBJ.nickname_textBox()).setValue(this.Account.nickname)
-                                await (await SignupOBJ.confirm_btn()).click()
-
-                                this.Account.created_at = moment(Date.now()).format('L')
-                                await this.saveAccount()
-
-                                await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
-                                // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
-                                // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
-
-
-                                await browser.pause(1000)
-
-                            }//waitUntilUsernameFormDisplayed
                             //////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////
                             //////////////////////////////////////////////////////////////
-
 
                         }
 
@@ -358,6 +326,44 @@ class Signup {
 
     saveAccount = async () => {
         await addRow(this.Account)
+    }
+
+    username = async () => {
+
+        await browser.pause(3000)
+
+        if (await (await SignupOBJ.username_form()).isDisplayed()) {
+
+            await (await SignupOBJ.username_textBox()).setValue(this.Account.username)
+            await browser.hideKeyboard()
+            await browser.pause(1000)
+            await (await SignupOBJ.confirm_signup()).click()
+
+            await browser.pause(3000)
+
+            if (await (await SignupOBJ.skip_btn()).isDisplayed()) {
+                await (await SignupOBJ.skip_btn()).click()
+            }
+
+        }
+
+        if (await (await SignupOBJ.nickname_form()).isDisplayed()) {
+
+            await (await SignupOBJ.nickname_textBox()).setValue(this.Account.nickname)
+            await browser.hideKeyboard()
+            await browser.pause(1000)
+            await (await SignupOBJ.confirm_btn()).click()
+        }
+
+
+        
+        this.Account.created_at = moment(Date.now()).format('L')
+        await this.saveAccount()
+
+        await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
+        // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
+        // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..", "..", "sound", "success.wav") })
+        await browser.pause(1000)
     }
 
 }

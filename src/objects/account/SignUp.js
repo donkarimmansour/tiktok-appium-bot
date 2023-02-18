@@ -10,7 +10,7 @@ const Pass_TextBox = '//*[@text="Enter password"]'
 const Birthday_Form = '//*[@text="When’s your birthday?"]'
 const Birthday_TextBox = '//*[@text="Birthday"]'
 const Submit = '//*[@text="Next"]'
-const Nickname_Form = '//*[@text="Create nickname"]'
+const Nickname_Form = '//*[@text="Create nickname"]' 
 const Nickname_TextBox = '//*[@text="Add your nickname"]'
 const Username_Form = '//*[@text="Create username"]'
 const Username_TextBox = '//*[@text="Username"]'
@@ -39,16 +39,13 @@ const Confirm_Code = '//*/android.widget.EditText'
 
 class Signup {
 
-    async waitUntilLoginPageDisplayed() {
-        await (await $(Login_Page)).waitForDisplayed()
-        if (await (await $(Login_Page)).isDisplayed()) return true
-        return false
-    }
+    // async waitUntilLoginPageDisplayed() {
+    //     await (await $(Login_Page)).waitForDisplayed()
+    //     if (await (await $(Login_Page)).isDisplayed()) return true
+    //     return false
+    // }
 
-    async login_signUp_btn() {
-        return await $(Login_SignUp_BTN)
-    }
-
+   
 
 
     async waitUntilConfirmCodeDisplayed() {
@@ -57,11 +54,11 @@ class Signup {
         return false
     }
 
-    async waitUntilInitDisplayed() {
-        await (await $(SignUp_Init)).waitForDisplayed()
-        if (await (await $(SignUp_Init)).isDisplayed()) return true
-        return false
-    }
+    // async waitUntilInitDisplayed() {
+    //     await (await $(SignUp_Init)).waitForDisplayed()
+    //     if (await (await $(SignUp_Init)).isDisplayed()) return true
+    //     return false
+    // }
 
     async waitUntilSignUpPageDisplayed() {
         await (await $(SignUp_Page)).waitForDisplayed()
@@ -95,18 +92,33 @@ class Signup {
         return false
     }
 
-    async waitUntilUsernameFormDisplayed() {
-        await (await $(Username_Form)).waitForDisplayed()
-        if (await (await $(Username_Form)).isDisplayed()) return true
-        return false
+    // async waitUntilUsernameFormDisplayed() {
+    //     await (await $(Username_Form)).waitForDisplayed()
+    //     if (await (await $(Username_Form)).isDisplayed()) return true
+    //     return false
+    // }
+
+    // async waitUntilNicknameFormDisplayed() {
+    //     await (await $(Nickname_Form)).waitForDisplayed()
+    //     if (await (await $(Nickname_Form)).isDisplayed()) return true
+    //     return false
+    // }
+
+    async login_signUp_btn() {
+        return await $(Login_SignUp_BTN)
     }
 
-    async waitUntilNicknameFormDisplayed() {
-        await (await $(Nickname_Form)).waitForDisplayed()
-        if (await (await $(Nickname_Form)).isDisplayed()) return true
-        return false
+    async username_form() {
+        return await $(Username_Form)
+    }
+ 
+    async nickname_form() {
+        return await $(Nickname_Form)
     }
 
+    async login_page() {
+        return await $(Login_Page)
+    }
 
 
     async form_err() {

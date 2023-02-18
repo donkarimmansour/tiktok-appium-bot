@@ -3,8 +3,6 @@ import SplashOBJ from '../../../objects/account/Splash'
 class Splash {
 
     async Init() {
-
-        await browser.pause(1000)
         
         if (await SplashOBJ.waitUntiCategoriesDisplayed()) {
             await (await SplashOBJ.skip_btn()).click()

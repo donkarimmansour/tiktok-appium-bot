@@ -83,6 +83,7 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
                     }
 
                     if (Account.vpn === "nordvpn") {
+
                         await browser.startActivity("com.nordvpn.android", ".mobile.main.ControlActivity")
 
                         const NordVpnTest = new NordVpn(Account.country)
@@ -169,9 +170,10 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
                 /////////////////////////////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////////////////////////////
 
-                await browser.pause(1000)
+                // await browser.pause(1000)
 
                 if (Account.vpn === "nordvpn") {
+
                     await browser.startActivity("com.nordvpn.android", ".mobile.main.ControlActivity")
 
                     const NordVpnTest = new NordVpn(Account.country)

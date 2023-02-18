@@ -1,0 +1,25 @@
+nickname: 'كريـس ♕',
+bioLink: 'https://t.me/motna0',
+followers: 331900,
+videos:
+
+title: 'original sound',
+playURL: 'https://sf16-ies-music-sg.tiktokcdn.com/obj/tiktok-obj/6975634638861503233.mp3',
+author: 'Business | Quotes | Motivation',
+duration: 14,
+
+video
+
+description: 'مين يعرف كم مزال يوم ع رمضان ؟🤍. {#team_middle_knights🇱🇾🤍 }. {#🤍team_middle_knights🇱🇾 }. {#ن       يمار_الساحر_البرازيلي🇧�  {#تيم_كريـس♕ } {#تيم_كلنـا_سـبعه♕ } ',
+} {#تيم_كريـس♕ } {#تيم_كلنـا_سـبعه♕ } ',
+createdAt: '4‏/2‏/2023',
+duration: 8,
+shareCount: 103,
+likesCount: 6337,
+commentCount: 218,
+playCount: 47300,
+author: 'm7ht4_',
+directVideoUrl: 'https://www.tiktok.com/@m7ht4_/video/7196341162242886917'
+
+
+directVideoUrl: 'https://www.tiktok.com/@m7ht4_/video/7185150441674624261'

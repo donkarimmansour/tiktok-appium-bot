@@ -21,9 +21,11 @@ class Follower {
             if (await FollowerOBJ.waitUntilSearchBoxDisplayed()) {
                 await (await FollowerOBJ.search_box()).clearValue()
                 await (await FollowerOBJ.search_box()).setValue(this.motherAccount)
+                await browser.hideKeyboard()
+                await browser.pause(1000)
+
                 await (await FollowerOBJ.search_btn()).click()
                 await (await FollowerOBJ.user_tap()).click()
-
 
                 await browser.pause(3000)
                 
@@ -64,9 +66,7 @@ class Follower {
                            await browser.back()
                            await browser.back()
                            await browser.back()
-                           
-                           await browser.pause(3000)
-           
+                                      
                            // await (await FollowerOBJ.back_btn()).click()
                            // await (await FollowerOBJ.back_btn2()).click()
                            // await (await FollowerOBJ.back_btn2()).click()

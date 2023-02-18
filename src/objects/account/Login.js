@@ -26,17 +26,17 @@ const Pass_Err = '//*[@text="Incorrect account or password"]'
 class Login {
 
 
-    async waitUntilInitDisplayed() {
-        await (await $(SignUp_Init)).waitForDisplayed()
-        if (await (await $(SignUp_Init)).isDisplayed()) return true
-        return false
-    }
+    // async waitUntilInitDisplayed() {
+    //     await (await $(SignUp_Init)).waitForDisplayed()
+    //     if (await (await $(SignUp_Init)).isDisplayed()) return true
+    //     return false
+    // }
 
-    async waitUntilSignUpPageDisplayed() {
-        await (await $(SignUp_Page)).waitForDisplayed()
-        if (await (await $(SignUp_Page)).isDisplayed()) return true
-        return false
-    }
+    // async waitUntilSignUpPageDisplayed() {
+    //     await (await $(SignUp_Page)).waitForDisplayed()
+    //     if (await (await $(SignUp_Page)).isDisplayed()) return true
+    //     return false
+    // }
 
     async waitUntilLoginPageDisplayed() {
         await (await $(Login_Page)).waitForDisplayed()
@@ -76,9 +76,14 @@ class Login {
     // }
 
 
-    async signup_btn() {
-        return await $(SignUp_BTN)
+    async signup_page() {
+        return await $(SignUp_Page)
     }
+    
+
+    // async signup_btn() {
+    //     return await $(SignUp_BTN)
+    // }
 
     async login_btn() {
         return await $(LOGIN_BTN)

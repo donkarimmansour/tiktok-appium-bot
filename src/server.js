@@ -27,7 +27,7 @@ const main = async choose => {
         choose = await List()
         await main(choose)
     } else if (choose?.list === "start") {
-          
+
         const start = await Start()
         updateAttributeEnv("start", start)
 
@@ -36,19 +36,17 @@ const main = async choose => {
             const current = await Current()
             updateAttributeEnv("current", current)
         }
-        a//wait appium.main({ port: 4723, address: "127.0.0.1" })
 
-        if(process.env.version == 1){
-             cp.exec('start cmd.exe /K appium --address 127.0.0.1 --port 4723  && npm run v1')
+        //await appium.main({ port: 4723, address: "127.0.0.1" })
 
-            //cp.exec('npm run v1')
-        }else if(process.env.version == 2){
-            cp.exec('start cmd.exe /K appium --address 127.0.0.1 --port 4723  && npm run v2')
+        //if(process.env.version == 1){
+             cp.exec('start cmd.exe /K appium --address 127.0.0.1 --port 4723  && npm run v2')
 
-            //cp.exec('npm run v2')
-        }
-
-        //cp.exec('start cmd.exe /K appium --address 127.0.0.1 --port 4723  && npm run wdio')
+        //     //cp.exec('npm run v1')
+        // }else if(process.env.version == 2){
+        //     cp.exec('start cmd.exe /K appium --address 127.0.0.1 --port 4723  && npm run v2')
+        //     //cp.exec('npm run v2')
+        // }
 
         clear()
         choose = await List(["end" , "clear"])
@@ -68,7 +66,7 @@ const main = async choose => {
             choose = await List(["end" , "clear"])
             await main(choose)
         }
-        
+
     }
 
 }

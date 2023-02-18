@@ -37,7 +37,7 @@ start=signup  #new/#current
 current=follow  #follow/#edit/#upload/#all
 
 ######################
-version=2  #1/#2
+#version=2  #1/#2
 ######################
 
 #country=Ireland

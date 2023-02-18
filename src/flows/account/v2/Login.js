@@ -14,6 +14,12 @@ class Login {
 
     async LoginToAccount() {
 
+        await browser.pause(5000)
+
+        if (await (await LoginOBJ.signup_page()).isDisplayed()) {
+            await (await LoginOBJ.login_btn()).click()
+        }
+
 
         if (await LoginOBJ.waitUntilLoginPageDisplayed()) {
             await (await LoginOBJ.email_btn()).click()
@@ -25,10 +31,14 @@ class Login {
                     await (await LoginOBJ.email_tap()).click()
                     await (await LoginOBJ.email_textBox()).setValue(this.Account.email)
                     await (await LoginOBJ.pass_textBox()).setValue(this.Account.password)
+
+                    await browser.hideKeyboard()
+                    await browser.pause(1000)
+
                     await (await LoginOBJ.submit_btn()).click()
 
 
-                    await browser.pause(15000)
+                    await browser.pause(30000)
 
                     const checkCaptcha = async () => {
                         if (await (await CaptchaOBJ.cap_select()).isDisplayed()) {
@@ -85,9 +95,9 @@ class Login {
                         console.log("okey");
                         console.log("okey");
 
-                                        ////////////////////////////////////////////////////////////////////////////////////////
-                                        ////////////////////////////////////////////////////////////////////////////////////////
-                                        ////////////////////////////////////////////////////////////////////////////////////////
+                        ////////////////////////////////////////////////////////////////////////////////////////
+                        ////////////////////////////////////////////////////////////////////////////////////////
+                        ////////////////////////////////////////////////////////////////////////////////////////
 
 
                         // if (await (await LoginOBJ.account_exist()).isDisplayed()){

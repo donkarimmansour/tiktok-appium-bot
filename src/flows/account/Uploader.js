@@ -13,10 +13,11 @@ class Uploader {
 
     async UploadVideo() {
 
-        if (this.counter <= this.limit) {
+        if (this.counter < this.limit) {
 
-            if (await NavBar.wait_until_home_displayed()) {
+           // if (await NavBar.wait_until_home_displayed()) {
 
+                await browser.pause(3000)
                 await (await NavBar.upload_icon()).click()
                 
                 if (await UploaderOBJ.waitUntilUploadDisplayed()) {
@@ -26,7 +27,7 @@ class Uploader {
                     if (await UploaderOBJ.waitUntilSelectDisplayed()) {
 
 
-                        await browser.pause(3000)
+                        //await browser.pause(3000)
 
                         ///////////////////////////////////////////////////////////////////////
                         // if (await (await UploaderOBJ.feature_popup()).isDisplayed()) {//
@@ -107,7 +108,7 @@ class Uploader {
 
                             await browser.pause(2000)
 
-                            await (await NavBar.home_icon()).click()
+                            //await (await NavBar.home_icon()).click()
 
                             this.counter++
 
@@ -116,7 +117,9 @@ class Uploader {
                         }//waitUntilTextDisplayed
                     }//waitUntilSelectDisplayed
                 }//waitUntilUploadDisplayed
-            }//wait_until_home_displayed
+           
+           
+           // }//wait_until_home_displayed
 
         }else{
             await (await NavBar.discover_icon()).click()

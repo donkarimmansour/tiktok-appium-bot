@@ -68,12 +68,21 @@ class Profile {
 
                         //await (await ProfileOBJ.back_btn()).click()
                         await browser.back()
-
                         await browser.pause(1000)
+                        
                         await browser.back()
                         await browser.pause(1000)
 
                         await (await NavBar.home_icon()).click()
+
+                        // if(await (await NavBar.home_icon()).isDisplayed()){
+                        //      await (await NavBar.home_icon()).click()
+                        // }else{
+                        //     await browser.back()
+                        //     await browser.pause(1000)
+                        //     await (await NavBar.home_icon()).click()
+                        // }
+                       
 
                         // await (await ProfileOBJ.image_back()).click()
 

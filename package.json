@@ -24,6 +24,7 @@
     "imap-simple": "^5.1.0",
     "inquirer": "^8.0.0",
     "moment": "^2.29.4",
+    "tiktok-scraper-ts": "^1.4.1",
     "webdriverio": "^6.4.6",
     "x-sound-player": "^1.0.1"
   },
