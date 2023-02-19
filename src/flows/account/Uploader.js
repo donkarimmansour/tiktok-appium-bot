@@ -13,7 +13,7 @@ class Uploader {
 
     async UploadVideo() {
 
-        if (this.counter < this.limit) {
+        if (this.counter <= this.limit) {
 
            // if (await NavBar.wait_until_home_displayed()) {
 
@@ -59,16 +59,11 @@ class Uploader {
                         await (await UploaderOBJ.video_select()).click()
                         await (await UploaderOBJ.save_btn()).click()
 
-
-
-                        await browser.pause(3000)
                         if (await (await UploaderOBJ.save_btn()).isDisplayed()) {
                             await (await UploaderOBJ.save_btn()).click()
                         }
 
                         
-
-
                         if (await UploaderOBJ.waitUntilTextDisplayed()) {
                             await (await UploaderOBJ.textarea()).setValue(this.hastags)
                             await browser.pause(2000)
@@ -122,6 +117,7 @@ class Uploader {
            // }//wait_until_home_displayed
 
         }else{
+
             await (await NavBar.discover_icon()).click()
 
             const isUploading = async() => {

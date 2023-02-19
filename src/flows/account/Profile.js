@@ -9,7 +9,7 @@ class Profile {
 
     async EditAccount() {
 
-        if (await NavBar.wait_until_home_displayed()) {
+       // if (await NavBar.wait_until_home_displayed()) {
             await (await NavBar.profile_icon()).click()
   
 
@@ -32,7 +32,6 @@ class Profile {
                     await (await ProfileOBJ.save_btn()).click()
 
                     if(await (await ProfileOBJ.save_btn()).isDisplayed()){
-                        await browser.back()
                         await browser.back()
                     }
 
@@ -73,15 +72,16 @@ class Profile {
                         await browser.back()
                         await browser.pause(1000)
 
-                        await (await NavBar.home_icon()).click()
+                        // await browser.back()
+                        // await (await NavBar.home_icon()).click()
 
-                        // if(await (await NavBar.home_icon()).isDisplayed()){
-                        //      await (await NavBar.home_icon()).click()
-                        // }else{
-                        //     await browser.back()
-                        //     await browser.pause(1000)
-                        //     await (await NavBar.home_icon()).click()
-                        // }
+                        if(await (await NavBar.home_icon()).isDisplayed()){
+                             await (await NavBar.home_icon()).click()
+                        }else{
+                            await browser.back()
+                            await browser.pause(1000)
+                            await (await NavBar.home_icon()).click()
+                        }
                        
 
                         // await (await ProfileOBJ.image_back()).click()
@@ -93,9 +93,8 @@ class Profile {
 
             }
 
-        }
+      //  }
 
-        return this;
     }
 
 }

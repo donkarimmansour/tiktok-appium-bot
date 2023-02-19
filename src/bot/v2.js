@@ -62,12 +62,9 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
             /////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
             if (Account.start === "new") {
                 let counter = 1
                 const repeater = async () => {
-
 
 
                     /////////////////////////////////////////////////////////////////////////////////////
@@ -133,7 +130,7 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
 
 
                     //const HomeTest = new Home()
-                    //await HomeTest.init()
+                    //await HomeTest.init() 
 
                     if (Account.type === "signup") {
                         const ProfileTest = new Profile(Account.bio)
@@ -231,7 +228,7 @@ describe(`Account Function for ${browser.capabilities.deviceName}`, () => {
 
             const date = moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')
 
-            fs.appendFileSync("./errors/messages.txt", error.message + "\n" + date + "\n")
+            fs.appendFileSync("./errors/messages.txt", error?.message + "\n" + date + "\n")
             fs.appendFileSync("./errors/logs.txt", error + "\n" + date + "\n")
 
         }

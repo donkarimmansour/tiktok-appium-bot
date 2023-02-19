@@ -110,7 +110,7 @@ class Signup {
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 await (await SignupOBJ.submit()).click()
 
-                await browser.pause(15000)
+                await browser.pause(30000)
 
                 const checkCaptcha = async () => {
                     if (await (await CaptchaOBJ.cap_slide()).isDisplayed()) {
@@ -118,7 +118,7 @@ class Signup {
                         // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..","..", "sound", "beep.wav") })
                         // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..","..", "sound", "beep.wav") })
 
-                        await browser.pause(20000)
+                        await browser.pause(10000)
 
                         if (await (await CaptchaOBJ.cap_slide()).isDisplayed()) {
                             await checkCaptcha()
@@ -177,7 +177,7 @@ class Signup {
                                 // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..","..", "sound", "beep.wav") })
                                 // await soundPlayer.playAsync({ soundPath: join(__dirname, "..", "..","..", "sound", "beep.wav") })
 
-                                await browser.pause(20000)
+                                await browser.pause(10000)
 
                                 if (await (await CaptchaOBJ.cap_rotate()).isDisplayed()) {
                                     await checkCaptcha2()
@@ -253,7 +253,7 @@ class Signup {
                                                 await browser.pause(30000)
 
                                                 await (await SignupOBJ.send_Confirm_email()).click()
-                                                await browser.pause(30000)
+                                                await browser.pause(20000)
 
                                                 await checkCode()
 

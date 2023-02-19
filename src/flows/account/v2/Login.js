@@ -46,7 +46,7 @@ class Login {
                             // await soundPlayer.playAsync({ soundPath: join(__dirname, ".." , "..", "..", "sound", "beep.wav") })
                             // await soundPlayer.playAsync({ soundPath: join(__dirname, ".." , "..", "..", "sound", "beep.wav") })
 
-                            await browser.pause(20000)
+                            await browser.pause(10000)
 
                             if (await (await CaptchaOBJ.cap_select()).isDisplayed()) {
                                 await checkCaptcha()

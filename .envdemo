@@ -24,7 +24,7 @@ uploadLimit=3
 
 #vpn
 country=United States
-ip=same
+ip=same  #unique/#same
 vpn=nordvpn
 
 #33mail

@@ -15,7 +15,7 @@ class Follower {
        // allureReporter.addStep(`go to search section`)
 
 
-        if (await NavBar.wait_until_home_displayed()) {
+       // if (await NavBar.wait_until_home_displayed()) {
             await (await FollowerOBJ.search_icon()).click()
 
             if (await FollowerOBJ.waitUntilSearchBoxDisplayed()) {
@@ -111,7 +111,7 @@ class Follower {
 
 
             }
-        }
+       // }
 
     }
 

@@ -11,7 +11,7 @@ class NordVpn {
 
     async ChangeIp() {
         
-        if ( (process.env.start === "current" || process.env.ip === "same") && await (await NordVpnOBJ.conected(this.country)).isDisplayed()) {
+        if ((process.env.start === "current" || process.env.ip === "same") && await (await NordVpnOBJ.conected(this.country)).isDisplayed()) {
             console.log("conected");
             console.log("conected");
             console.log("conected");
