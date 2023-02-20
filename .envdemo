@@ -36,6 +36,14 @@ gmailPassword=tkorczgupdhvwaks
 start=signup  #new/#current
 current=follow  #follow/#edit/#upload/#all
 
+
+#########IMPORTANT#############
+#### #start=>#new/#current ####
+#### #type=>#login/#signup ####
+#### #ip=>#unique/#same    ####
+#########IMPORTANT#############
+
+
 ######################
 #version=2  #1/#2
 ######################

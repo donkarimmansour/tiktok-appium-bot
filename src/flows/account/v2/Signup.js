@@ -10,12 +10,12 @@ import { addRow } from '../../../common/helper';
 class Signup {
 
     constructor(Account) {
-        this.Account = Account
+        this.Account = Account 
     }
 
     async CreateNewAccount() {
 
-        await browser.pause(5000)
+        await browser.pause(10000)
 
         if (await (await SignupOBJ.login_page()).isDisplayed()) {
             await (await SignupOBJ.login_signUp_btn()).click()

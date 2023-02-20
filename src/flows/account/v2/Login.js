@@ -14,7 +14,7 @@ class Login {
 
     async LoginToAccount() {
 
-        await browser.pause(5000)
+        await browser.pause(10000)
 
         if (await (await LoginOBJ.signup_page()).isDisplayed()) {
             await (await LoginOBJ.login_btn()).click()

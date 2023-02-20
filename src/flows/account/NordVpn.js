@@ -16,13 +16,12 @@ class NordVpn {
             console.log("conected");
             console.log("conected");
 
-        }if (process.env.ip === "unique" && await (await NordVpnOBJ.conected(this.country)).isDisplayed()) {
+        }else if (process.env.ip === "unique" && await (await NordVpnOBJ.conected(this.country)).isDisplayed()) {
            
             await (await NordVpnOBJ.disconnect_btn()).click()
             await browser.pause(3000)
 
-            this.ChangeIp()
-            return
+           await this.ChangeIp()
 
         }else {
 
